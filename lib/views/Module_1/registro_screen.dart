@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class RegistroScreen extends StatefulWidget {
   @override
@@ -13,7 +14,31 @@ class _RegistroScreenState extends State<RegistroScreen> {
   TextEditingController _edadController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
   TextEditingController _contrasenaController = TextEditingController();
-  TextEditingController _confirmarContrasenaController = TextEditingController();
+  TextEditingController _confirmarContrasenaController =
+      TextEditingController();
+
+  Future<void> _enviarRegistro() async {
+    final url = Uri.parse('http://localhost:3000/api/registro');
+    final response = await http.post(
+      url,
+      body: {
+        'nombre': _nombreController.text,
+        'apellidoPaterno': _apellidoPaternoController.text,
+        'apellidoMaterno': _apellidoMaternoController.text,
+        'edad': _edadController.text,
+        'email': _emailController.text,
+        'contrasena': _contrasenaController.text,
+      },
+    );
+
+    if (response.statusCode == 201) {
+      // Registro exitoso, puedes manejar la respuesta aquí
+      print('Usuario registrado exitosamente');
+    } else {
+      // Ocurrió un error al registrar al usuario, maneja el error aquí
+      print('Error al registrar al usuario');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,15 +130,14 @@ class _RegistroScreenState extends State<RegistroScreen> {
                 },
               ),
               SizedBox(height: 20),
-             ElevatedButton(
-  onPressed: () {
-    if (_formKey.currentState?.validate() ?? false) {
-      // Lógica de registro
-    }
-  },
-  child: Text('Registrarse'),
-),
-
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState?.validate() ?? false) {
+                    _enviarRegistro();
+                  }
+                },
+                child: Text('Registrarse'),
+              ),
             ],
           ),
         ),
