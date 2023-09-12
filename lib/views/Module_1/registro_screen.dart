@@ -22,7 +22,7 @@ class _RegistroScreenState extends State<RegistroScreen> {
     final response = await http.post(
       url,
       body: {
-        'nombre': _nombreController.text,
+        'Nombre': _nombreController.text,
         'apellidoPaterno': _apellidoPaternoController.text,
         'apellidoMaterno': _apellidoMaternoController.text,
         'edad': _edadController.text,
