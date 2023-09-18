@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:glucontrol_app/views/Module_1/registro_screen.dart';
+import 'package:glucontrol_app/views/Module_2/login.dart';
 
 class InfoMenu extends StatelessWidget {
   @override
@@ -14,7 +15,10 @@ class InfoMenu extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                // Agrega la navegación para "Iniciar Sesión"
+             Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginApp()),
+                );
               },
               child: Text('Iniciar Sesión'),
             ),

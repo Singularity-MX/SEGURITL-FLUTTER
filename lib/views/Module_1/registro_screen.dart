@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:glucontrol_app/views/Module_3/home.dart';
+
 
 class RegistroScreen extends StatefulWidget {
   @override
@@ -132,9 +134,11 @@ class _RegistroScreenState extends State<RegistroScreen> {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    _enviarRegistro();
-                  }
+                 //validar y registrar la info
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
                 },
                 child: Text('Registrarse'),
               ),
