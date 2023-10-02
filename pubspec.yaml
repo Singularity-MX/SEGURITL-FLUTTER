@@ -36,6 +36,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   http: ^1.1.0
+  flutter_svg: ^0.22.0
+  intl: ^0.17.0 # Asegúrate de tener la última versión de intl
+  crypto: ^3.0.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +68,11 @@ flutter:
     - lib/assets/fondo.jpg
     - lib/assets/Logo.png
     - lib/assets/log.svg
+    - lib/assets/logoHeader.png
+    - lib/assets/ICONS_CARD/saludo.png
+    - lib/assets/ICONS_CARD/cumpleaños.png
+    - lib/assets/ICONS_CARD/medidas.png
+    - lib/assets/ICONS_CARD/clave.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
