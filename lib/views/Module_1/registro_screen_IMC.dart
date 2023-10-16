@@ -268,16 +268,31 @@ class _RegistrosScreenIMCState extends State<RegistrosScreenIMC> {
         ),
       );
     } else {
-      // Si ambos campos tienen valores, continuar
-      widget.registro.altura = double.tryParse(txtEstatura.text) ?? 0.0;
-      widget.registro.peso = double.tryParse(txtPeso.text) ?? 0.0;
+  
+  // Validar que la altura sea menor de 250 cm y el peso sea menor de 500 kg
+double altura = double.tryParse(txtEstatura.text) ?? 0.0;
+double peso = double.tryParse(txtPeso.text) ?? 0.0;
 
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => RegistrosScreenClaves(registro: widget.registro),
-        ),
-      );
+if (altura > 0 && altura < 250 && peso > 0 && peso < 500) {
+  // Los valores son válidos, puedes continuar
+  widget.registro.altura = altura;
+  widget.registro.peso = peso;
+
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => RegistrosScreenClaves(registro: widget.registro),
+    ),
+  );
+} else {
+  // Mostrar un mensaje de error si los valores no son válidos
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Text('Por favor, ingresa una altura válida (menos de 250 cm) y un peso válido (menos de 500 kg).'),
+    ),
+  );
+}
+
     }
   },
   style: ElevatedButton.styleFrom(

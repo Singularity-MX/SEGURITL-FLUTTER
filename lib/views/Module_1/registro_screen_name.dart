@@ -19,11 +19,8 @@ class RegistroScreen extends StatelessWidget {
 // Declara la instancia del modelo aquí
   final RegistroModel registro = RegistroModel();
 
-
   @override
   Widget build(BuildContext context) {
-  
-
     // Determinar si es día, tarde o noche
     final horaActual = DateTime.now().hour;
     String saludo;
@@ -34,6 +31,8 @@ class RegistroScreen extends StatelessWidget {
     } else {
       saludo = 'Buenas noches';
     }
+
+    //validar TXTs
 
     // Configura el color de la barra de notificaciones
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -305,45 +304,65 @@ class RegistroScreen extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
               child: ElevatedButton(
-  onPressed: () {
-    // Validar que los campos no estén vacíos
-    if (txtNombre.text.isEmpty ||
-        txtAP.text.isEmpty ||
-        txtAM.text.isEmpty ||
-        txtSexo == null) {
-      // Muestra un diálogo de error si los campos están vacíos
-       // Muestra un mensaje de error si uno de los campos está vacío
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Por favor, completa todos los campos.'),
-        ),
-      );
-    } else {
-      // Si los campos no están vacíos, asigna los valores y navega a la siguiente pantalla
-      registro.nombre = txtNombre.text;
-      registro.apellidoPaterno = txtAP.text;
-      registro.apellidoMaterno = txtAM.text;
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => RegistroScreenBirthday(registro: registro),
-        ),
-      );
-    }
-  },
-  style: ElevatedButton.styleFrom(
-    primary: Color(0xFFFF3C3C),
-    padding: EdgeInsets.all(16.0),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(15.0),
-    ),
-  ),
-  child: Text(
-    'Siguiente',
-    style: TextStyle(fontSize: 18, color: Colors.white),
-  ),
-),
+                onPressed: () {
+                  // Validar que los campos no estén vacíos
+                  if (txtNombre.text.isEmpty ||
+                      txtAP.text.isEmpty ||
+                      txtAM.text.isEmpty ||
+                      txtSexo == null) {
+                    // Muestra un diálogo de error si los campos están vacíos
+                    // Muestra un mensaje de error si uno de los campos está vacío
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Por favor, completa todos los campos.'),
+                      ),
+                    );
+                  } else {
+                    // Si los campos no están vacíos, asigna los valores y navega a la siguiente pantalla
+                    bool contieneNumeros(String texto) {
+                      final contieneNumeros = RegExp(r'[0-9]').hasMatch(texto);
+                      return contieneNumeros;
+                    }
 
+// Dentro de tu función para enviar los datos
+                    if (contieneNumeros(txtNombre.text) ||
+                        contieneNumeros(txtAP.text) ||
+                        contieneNumeros(txtAM.text)) {
+                      // Mostrar un mensaje de error
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content:
+                              Text('Los campos no deben contener números.'),
+                        ),
+                      );
+                    } else {
+                      // Los campos son válidos y puedes continuar con el envío de datos.
+                      registro.nombre = txtNombre.text;
+                      registro.apellidoPaterno = txtAP.text;
+                      registro.apellidoMaterno = txtAM.text;
+                      // Luego, continúa con el proceso de envío de datos.
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              RegistroScreenBirthday(registro: registro),
+                        ),
+                      );
+                    }
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFFFF3C3C),
+                  padding: EdgeInsets.all(16.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+                child: Text(
+                  'Siguiente',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
             ),
           ],
         ),

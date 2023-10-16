@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart'; // Importa la librería intl para dar formato a la fecha
 import 'package:glucontrol_app/models/Module1/RegistroModel.dart';
 import 'package:glucontrol_app/controllers/Module1/RegisterUserController.dart';
+import 'package:glucontrol_app/views/Module_2/login.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive, overlays: []);
@@ -10,7 +12,8 @@ void main() {
   RegistroModel registro = RegistroModel();
 
   runApp(MaterialApp(
-    home: RegistrosScreenClaves(registro: registro), // Pasa registro como argumento
+    home: RegistrosScreenClaves(
+        registro: registro), // Pasa registro como argumento
   ));
 }
 
@@ -26,11 +29,11 @@ class RegistrosScreenClaves extends StatefulWidget {
 
 class _RegistrosScreenClavesState extends State<RegistrosScreenClaves> {
   DateTime? selectedDate; // Variable para almacenar la fecha seleccionada
-final TextEditingController txtEmail = TextEditingController();
-final TextEditingController txtPassword = TextEditingController();
-final TextEditingController txtPasswordConfirm = TextEditingController();
+  final TextEditingController txtEmail = TextEditingController();
+  final TextEditingController txtPassword = TextEditingController();
+  final TextEditingController txtPasswordConfirm = TextEditingController();
 
- // Declarar una instancia del controlador
+  // Declarar una instancia del controlador
   late RegisterUserController controlador;
 
   @override
@@ -54,11 +57,44 @@ final TextEditingController txtPasswordConfirm = TextEditingController();
     }
   }
 
- 
+  Future<void> RegistrarUsuario(String formData) async {
+    try {
+      final response = await http.post(
+        Uri.parse(backendUrl + '/api/Module1/Login/Insert'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: formData,
+      );
+
+      if (response.statusCode == 201) {
+        // Éxito: Navegar a la pantalla de inicio de sesión
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginApp()),
+        );
+      } else {
+        // Error: Mostrar un SnackBar con el mensaje de error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error de servidor: ${response.statusCode}'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error al enviar los datos al backend: $e');
+      // Mostrar un SnackBar con el mensaje de error de conexión
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              'No se pudo conectar al backend. Verifica tu conexión de red o inténtalo más tarde.'),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-  
-
     // Determinar si es día, tarde o noche
     final horaActual = DateTime.now().hour;
     String saludo;
@@ -190,9 +226,7 @@ final TextEditingController txtPasswordConfirm = TextEditingController();
                 textAlign: TextAlign.center,
               ),
             ),
-            
-
-              SizedBox(height: 20),
+            SizedBox(height: 20),
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextField(
@@ -202,8 +236,9 @@ final TextEditingController txtPasswordConfirm = TextEditingController();
                   color: Color(0xFF575757),
                   letterSpacing: 0.5,
                 ),
-                 keyboardType: TextInputType.emailAddress, // Configurar el teclado para números
-  
+                keyboardType: TextInputType
+                    .emailAddress, // Configurar el teclado para números
+
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -230,9 +265,7 @@ final TextEditingController txtPasswordConfirm = TextEditingController();
                 ),
               ),
             ),
-
-
- SizedBox(height: 20),
+            SizedBox(height: 20),
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextField(
@@ -242,7 +275,7 @@ final TextEditingController txtPasswordConfirm = TextEditingController();
                   color: Color(0xFF575757),
                   letterSpacing: 0.5,
                 ),
-              obscureText: true,
+                obscureText: true,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -269,9 +302,7 @@ final TextEditingController txtPasswordConfirm = TextEditingController();
                 ),
               ),
             ),
-
-
- SizedBox(height: 20),
+            SizedBox(height: 20),
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
               child: TextField(
@@ -281,7 +312,7 @@ final TextEditingController txtPasswordConfirm = TextEditingController();
                   color: Color(0xFF575757),
                   letterSpacing: 0.5,
                 ),
-               obscureText: true,
+                obscureText: true,
                 decoration: InputDecoration(
                   contentPadding:
                       EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -312,48 +343,80 @@ final TextEditingController txtPasswordConfirm = TextEditingController();
             Container(
               width: MediaQuery.of(context).size.width * 0.8,
               child: ElevatedButton(
-  onPressed: () {
-    // Validar que los campos no estén vacíos
-    if (txtEmail.text.isEmpty ||
-        txtPassword.text.isEmpty ||
-        txtPasswordConfirm.text.isEmpty) {
-      // Muestra un mensaje de error si algún campo está vacío
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Por favor, completa todos los campos.'),
-        ),
-      );
-    } else if (txtPassword.text != txtPasswordConfirm.text) {
-      // Verificar si las contraseñas coinciden
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Las contraseñas no coinciden. Inténtalo de nuevo.'),
-        ),
-      );
-    } else {
-      // Si todos los campos están completos y las contraseñas coinciden, continuar
-      // Aquí puedes realizar el registro o la acción que desees
-       widget.registro.email =txtEmail.text;
-      widget.registro.password = txtPassword.text;
+                onPressed: () async {
+                  // Validar que los campos no estén vacíos
+                  if (txtEmail.text.isEmpty ||
+                      txtPassword.text.isEmpty ||
+                      txtPasswordConfirm.text.isEmpty) {
+                    // Muestra un mensaje de error si algún campo está vacío
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Por favor, completa todos los campos.'),
+                      ),
+                    );
+                  } else if (txtPassword.text != txtPasswordConfirm.text) {
+                    // Verificar si las contraseñas coinciden
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                            'Las contraseñas no coinciden. Inténtalo de nuevo.'),
+                      ),
+                    );
+                  } else {
+                    // Validar el formato del correo
+                    bool esCorreoValido(String correo) {
+                      final regExpCorreo = RegExp(
+                        r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$',
+                      );
+                      return regExpCorreo.hasMatch(correo);
+                    }
 
-      //call to function para enviar por el endpoint
-     // Llama al método hacerAlgo del controlador
-     controlador.hacerAlgo();
-    }
-  },
-  style: ElevatedButton.styleFrom(
-    primary: Color(0xFFFF3C3C),
-    padding: EdgeInsets.all(16.0),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(15.0),
-    ),
-  ),
-  child: Text(
-    'Finalizar',
-    style: TextStyle(fontSize: 18, color: Colors.white),
-  ),
-),
+// Validar la contraseña
+                    bool esContrasenaValida(String contrasena) {
+                      final regExpContrasena = RegExp(
+                        r'^(?=.*[A-Z])(?=.*[0-9]).{8,}$',
+                      );
+                      return regExpContrasena.hasMatch(contrasena);
+                    }
 
+// Dentro de tu función para enviar los datos
+                    String correo = txtEmail.text;
+                    String contrasena = txtPassword.text;
+
+                    if (esCorreoValido(correo) &&
+                        esContrasenaValida(contrasena)) {
+                      // Los valores son válidos, puedes continuar
+                      widget.registro.email = correo;
+                      widget.registro.password = contrasena;
+
+                      // OBTIENE EL JSON
+                      String formData = controlador.CrearJson();
+
+                      // Función para el ENDPOINT
+                      await RegistrarUsuario(formData);
+                    } else {
+                      // Mostrar un mensaje de error si el correo o la contraseña no son válidos
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                              'Por favor, ingresa un correo válido y la contraseña debe tener mínimo 8 caracteres, 1 número y mayúsculas'),
+                        ),
+                      );
+                    }
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFFFF3C3C),
+                  padding: EdgeInsets.all(16.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                ),
+                child: Text(
+                  'Finalizar',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+              ),
             ),
           ],
         ),

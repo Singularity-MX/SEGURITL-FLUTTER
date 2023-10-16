@@ -1,7 +1,12 @@
 import 'package:glucontrol_app/models/Module1/RegistroModel.dart';
 import 'package:glucontrol_app/tools/password_hash.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
+import '../../configBackend.dart';
 
+
+// Para acceder a la dirección del backend:
+String backendUrl = ApiConfig.backendUrl;
 
 class RegisterUserController {
   final RegistroModel registro;
@@ -10,62 +15,45 @@ class RegisterUserController {
   RegisterUserController(this.registro);
 
 
-//enviarb json en el body
+  //enviar al backend
+String CrearJson() {
+  //obtiene el IMC
+  double imc = getIMC(registro.altura!, registro.peso!);
 
-
-  // Método para realizar una acción, como mostrar un mensaje en la consola
-  void hacerAlgo() {
-    double imc = getIMC(registro.altura!, registro.peso!);
-
-
- String salt = "GlucontrolHash"; // Cambia esto por un valor secreto y único
+  //hashea la contraseña
+  String salt = "GlucontrolHash"; // Cambia esto por un valor secreto y único
   String hashedPassword = hashPassword(registro.password!, salt);
-  
 
-
-    print('Hola desde el controlador');
-    print('Nombre: ${registro.nombre}');
-    print('AP: ${registro.apellidoPaterno}');
-    print('AM: ${registro.apellidoMaterno}');
-    print('FECHA: ${registro.fechaNacimiento}');
-    print('Altura: ${registro.altura}');
-    print('Peso: ${registro.peso}');
-    print('IMC: $imc'); // Imprimir el valor del IMC
-    print('Email: ${registro.email}');
-    print('Contraseña: ${registro.password}');
-    print('Contraseña hasheada: $hashedPassword');
-
-
-Map<String, dynamic> jsonObject = {
-  "Nombre": registro.nombre,
-  "ApellidoPaterno": registro.apellidoPaterno,
-  "ApellidoMaterno": registro.apellidoMaterno,
-  "FechaNacimiento": registro.fechaNacimiento,
-  "Altura": registro.altura,
-  "Peso": registro.peso,
-  "IMC": imc,
-  "Email": registro.email,
-  "Password": hashedPassword
+  //crear el JSON
+  Map<String, dynamic> jsonObject = {
+    "Nombre": registro.nombre,
+    "ApellidoPaterno": registro.apellidoPaterno,
+    "ApellidoMaterno": registro.apellidoMaterno,
+    "FechaNacimiento": registro.fechaNacimiento,
+    "Altura": registro.altura,
+    "Peso": registro.peso,
+    "IMC": imc,
+    "Email": registro.email,
+    "Pass": hashedPassword,
   };
 
   // Convertir el Map en una cadena JSON
-  String jsonString = jsonEncode(jsonObject);
+  String formData = jsonEncode(jsonObject);
 
-  print(jsonString);
-    // Puedes realizar cualquier otra acción que necesites aquí
-  }
+  return formData;
+}
 
-
-
-
-double getIMC(double altura, double peso) {
+  //GetIMC
+  double getIMC(double altura, double peso) {
     // Convertir la altura de centímetros a metros
     double alturaEnMetros =
         altura / 100; // Suponiendo que la altura está en centímetros
 
-// Calcular el IMC
+    // Calcular el IMC
     double imc = peso / (alturaEnMetros * alturaEnMetros);
 
     return imc;
   }
+
+
 }
