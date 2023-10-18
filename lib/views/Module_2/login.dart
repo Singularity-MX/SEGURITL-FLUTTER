@@ -98,43 +98,195 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Iniciar Sesión'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextFormField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: 'Correo Electrónico',
-              ),
+      body: Stack(
+        children: [
+          // Fondo con imagen
+          Image.asset(
+            'lib/assets/fondoLogin.jpg', // Ruta de la imagen de fondo
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
+
+          // Logo en el centro
+          // Logo en el centro
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(height: 100),
+                Image.asset(
+                  'lib/assets/LogoRojo.png', // Ruta del logo
+                  width: 120, // Ancho del logo
+                  height: 120, // Alto del logo
+                ),
+              ],
             ),
-            SizedBox(height: 16.0),
-            TextFormField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Contraseña',
-              ),
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: ()  async {
-                String formData =
-                    CrearJSON(_emailController.text, _passwordController.text);
-                //hacer el login
-                await Login(formData);
-              },
-              child: Text('Iniciar Sesión'),
-            ),
-          ],
-        ),
+          ),
+          // Contenedor con bordes redondeados y sombreado
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: Container(
+                height: MediaQuery.of(context).size.height *
+                    0.54, // Altura del 30% de la pantalla
+                width: MediaQuery.of(context)
+                    .size
+                    .width, // Ancho del 100% de la pantalla
+                padding: EdgeInsets.all(20.0),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 49, 49, 49),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(0.0),
+                    topRight: Radius.circular(0.0),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          Colors.black.withOpacity(0.25), // Color del sombreado
+                      spreadRadius: 5, // Radio de difusión
+                      blurRadius: 7, // Radio de desenfoque
+                      offset: Offset(0, 3), // Desplazamiento en X y Y
+                    ),
+                  ],
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'Inicia Sesión',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Color.fromRGBO(
+                            255, 255, 255, 1), // Color de la línea
+                        fontWeight: FontWeight.w200, // Fuente Extra Light
+                      ),
+                      textAlign: TextAlign.justify, // Justificar el texto
+                    ),
+                    SizedBox(height: 20), // Espacio entre el texto y la línea
+                    Divider(
+                      height: 1, // Altura de la línea
+                      color:
+                          Color.fromRGBO(247, 247, 247, 1), // Color de la línea
+                    ),
+                    
+                    SizedBox(height: 20),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: TextField(
+                        controller: _emailController, // Asignar el controlador
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 175, 175, 175),
+                          letterSpacing: 0.5,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          hintText: 'example@example.com',
+                          hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 175, 175, 175),
+                          ),
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 78, 78, 78),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 175, 175, 175),
+                            ),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.person_outlined,
+                            color: Color(0xFF777777),
+                          ),
+                        ),
+                      ),
+                    ),
+
+
+                    SizedBox(height: 20),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      child: TextField(
+                        controller: _passwordController, // Asignar el controlador
+                        obscureText: true,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color.fromARGB(255, 175, 175, 175),
+                          letterSpacing: 0.5,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 20),
+                          hintText: '**********',
+                          hintStyle: TextStyle(
+                            color: Color.fromARGB(255, 175, 175, 175),
+                          ),
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 78, 78, 78),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Color.fromARGB(255, 175, 175, 175),
+                            ),
+                          ),
+                          prefixIcon: Icon(
+                            Icons.person_outlined,
+                            color: Color(0xFF777777),
+                          ),
+                        ),
+                      ),
+                    ),
+
+      
+                    SizedBox(height: 20), // Espacio entre el texto y la línea
+                    Divider(
+                      height: 1, // Altura de la línea
+                      color:
+                          Color.fromRGBO(247, 247, 247, 1), // Color de la línea
+                    ),
+                    SizedBox(
+                        height: 30), // Espacio entre la línea y los botones
+                    ElevatedButton(
+                      onPressed: () async {
+                        String formData = CrearJSON(
+                            _emailController.text, _passwordController.text);
+                        //hacer el login
+                        await Login(formData);
+                      },
+                      child: Text('Iniciar sesión'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(
+                            30, 152, 222, 1), // Color de fondo del botón
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              10.0), // Radio de esquinas de 15
+                        ),
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width *
+                              0.8, // Ancho del 70% de la pantalla
+                          43, // Altura de 43
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+          ),
+
+          // Texto en la parte inferior
+        ],
       ),
     );
   }

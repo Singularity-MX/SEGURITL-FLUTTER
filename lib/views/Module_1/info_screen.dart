@@ -20,13 +20,13 @@ class InfoScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 60),
+                SizedBox(height: 80),
                 Image.asset(
                   'lib/assets/Logo.png', // Ruta del logo
-                  width: 230, // Ancho del logo
-                  height: 230, // Alto del logo
+                  width: 180, // Ancho del logo
+                  height: 180, // Alto del logo
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 30),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.65, // Ancho del 65% de la pantalla
                   alignment: Alignment.center, // Centrar el texto
@@ -76,7 +76,7 @@ class InfoScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
-                      fontWeight: FontWeight.w200, // Fuente Extra Light
+                       // Fuente Extra Light
                     ),
                     textAlign: TextAlign.justify, // Justificar el texto
                   ),
