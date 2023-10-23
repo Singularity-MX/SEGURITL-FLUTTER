@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
         // Éxito: Navegar a la pantalla de inicio de sesión
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error del servidor'),
+            content: Text('Error del servidor: '+ backendUrl),
           ),
         );
       }
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-              'No se pudo conectar al backend. Verifica tu conexión de red o inténtalo más tarde.'),
+              'No se pudo conectar al backend. Verifica tu conexión de red o inténtalo más tarde. ' + backendUrl+'\n'+'$e'),
         ),
       );
     }
