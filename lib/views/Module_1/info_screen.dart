@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'info_menu.dart'; // Importa la página InfoMenu
+import 'package:glucontrol_app/test/viewTest.dart';
 
 class InfoScreen extends StatelessWidget {
   @override
@@ -90,6 +91,27 @@ class InfoScreen extends StatelessWidget {
     );
   },
   child: Text('Ir al Menú de Información'),
+  style: ElevatedButton.styleFrom(
+    primary: Colors.blue, // Color de fondo del botón
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15.0), // Radio de esquinas de 15
+    ),
+    minimumSize: Size(
+      MediaQuery.of(context).size.width * 0.7, // Ancho del 70% de la pantalla
+      50, // Altura de 50
+    ),
+  ),
+),
+SizedBox(height: 20),
+ElevatedButton(
+  onPressed: () {
+    // Navegar a la página InfoMenu
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ConfigScreen()),
+    );
+  },
+  child: Text('test'),
   style: ElevatedButton.styleFrom(
     primary: Colors.blue, // Color de fondo del botón
     shape: RoundedRectangleBorder(

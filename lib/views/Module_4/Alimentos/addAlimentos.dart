@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart'; // Importa la librería intl para dar formato a la fecha
+import 'package:glucontrol_app/models/Module1/RegistroModel.dart';
+import 'package:glucontrol_app/controllers/Module4/FoodControllers.dart';
+import 'package:glucontrol_app/views/Module_2/login.dart';
+import 'package:http/http.dart' as http;
+import '../../../configBackend.dart';
+import 'package:glucontrol_app/views/Module_4/Alimentos/AlimentosScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,8 +26,55 @@ class AgregarAlimentoScreen extends StatefulWidget {
 
 class _AgregarAlimentoScreenState extends State<AgregarAlimentoScreen> {
   TextEditingController nombrePlatilloController = TextEditingController();
-  TextEditingController ingredientesController = TextEditingController();
-  TextEditingController clasificacionController = TextEditingController();
+  String? classification; // Cambiado a String?
+
+  List<String> clasificaciones = ["Carbohidratos", "Proteínas", "Grasas", "Frutas", "Verduras"];
+  String? selectedClasificacion = "Verduras";
+  String datos = "ad";
+  late FoodController controlador;
+
+  @override
+  void initState() {
+    super.initState(); // Asegúrate de llamar a super.initState() aquí
+    // Inicializar el controlador en el initState
+    controlador = FoodController();
+  }
+
+  Future<void> AddFood(String formData) async {
+    try {
+      final response = await http.post(
+        Uri.parse(backendUrl+'/api/Module4/CreateFood'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: formData,
+      );
+
+      if (response.statusCode == 200) {
+        // Éxito: Navegar a la pantalla de inicio de sesión
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => AlimentosScreen()),
+        );
+      } else {
+        // Error: Mostrar un SnackBar con el mensaje de error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error de servidor: ${response.statusCode}'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error al enviar los datos al backend: $e');
+      // Mostrar un SnackBar con el mensaje de error de conexión
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              'No se pudo conectar al backend. Verifica tu conexión de red o inténtalo más tarde.'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,37 +95,42 @@ class _AgregarAlimentoScreenState extends State<AgregarAlimentoScreen> {
               ),
             ),
             SizedBox(height: 16.0),
-            Text('Ingredientes:'),
-            TextField(
-              controller: ingredientesController,
-              decoration: InputDecoration(
-                hintText: 'Ingrese los ingredientes',
-              ),
-            ),
-            SizedBox(height: 16.0),
             Text('Clasificación:'),
-            TextField(
-              controller: clasificacionController,
-              decoration: InputDecoration(
-                hintText: 'Ingrese la clasificación',
-              ),
+            DropdownButton<String>(
+              value: selectedClasificacion,
+              items: clasificaciones.map((String clasificacion) {
+                return DropdownMenuItem<String>(
+                  value: clasificacion,
+                  child: Text(clasificacion),
+                );
+              }).toList(),
+              onChanged: (String? newValue) {
+                // Cambiado a String?
+                setState(() {
+                  selectedClasificacion = newValue;
+                });
+              },
             ),
             SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: () {
-                // Aquí puedes agregar la lógica para guardar el alimento en tu base de datos o realizar la acción deseada.
-                String nombrePlatillo = nombrePlatilloController.text;
-                String ingredientes = ingredientesController.text;
-                String clasificacion = clasificacionController.text;
+  onPressed: () async {
+    try {
+      String nombrePlatillo = nombrePlatilloController.text;
+      print('Nombre del Platillo: $nombrePlatillo');
+      print('Clasificación: $selectedClasificacion');
+      String formData = controlador.AddFoodJSON(
+          nombrePlatilloController.text, selectedClasificacion);
+       print('Nombre del Platillo: $formData');   
+      await AddFood(formData);
+    } catch (e, stackTrace) {
+      print('Error en el botón: $e');
+      print('Stack Trace: $stackTrace');
+    }
+  },
+  child: Text('Agregar Alimento'),
+),
 
-                print('Nombre del Platillo: $nombrePlatillo');
-                print('Ingredientes: $ingredientes');
-                print('Clasificación: $clasificacion');
-
-                // Puedes agregar aquí la lógica para guardar el alimento.
-              },
-              child: Text('Agregar Alimento'),
-            ),
+            Text('Nombre del Platillo: '),
           ],
         ),
       ),
@@ -79,10 +139,7 @@ class _AgregarAlimentoScreenState extends State<AgregarAlimentoScreen> {
 
   @override
   void dispose() {
-    // Limpia los controladores cuando se destruye el widget para liberar recursos.
     nombrePlatilloController.dispose();
-    ingredientesController.dispose();
-    clasificacionController.dispose();
     super.dispose();
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:glucontrol_app/views/Module_4/Alimentos/AlimentosScreen.dart';
 import 'package:glucontrol_app/views/Module_4/Actividades/ActivitiesScreen.dart';
 import 'package:glucontrol_app/views/Module_4/RegistroGlucosa.dart';
-import 'package:glucontrol_app/views/Module_1/info_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -66,18 +65,8 @@ class HomeScreen extends StatelessWidget {
                 ));
               },
             ),
-            ElevatedButton(
-            onPressed: () {
-             Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => InfoScreen()),
-                );
-            },
-            child: Text('Reset'),
-          ),
           ],
         ),
-        
       ),
     );
   }

@@ -25,7 +25,7 @@ class InfoMenu extends StatelessWidget {
             bottom: 0,
             child: Container(
                 height: MediaQuery.of(context).size.height *
-                    0.4, // Altura del 30% de la pantalla
+                    0.3, // Altura del 30% de la pantalla
                 width: MediaQuery.of(context)
                     .size
                     .width, // Ancho del 100% de la pantalla
@@ -113,7 +113,8 @@ class InfoMenu extends StatelessWidget {
                           43, // Altura de 43
                         ),
                       ),
-                    )
+                    ),
+                    
                   ],
                 )),
           ),

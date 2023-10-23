@@ -1,4 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart'; // Importa la librería intl para dar formato a la fecha
+import 'package:glucontrol_app/models/Module1/RegistroModel.dart';
+import 'package:glucontrol_app/controllers/Module4/ActivitiesController.dart';
+import 'package:glucontrol_app/views/Module_2/login.dart';
+import 'package:http/http.dart' as http;
+import '../../../configBackend.dart';
+import 'package:glucontrol_app/views/Module_4/Actividades/ActivitiesScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -17,11 +25,56 @@ class AgregarActividadScreen extends StatefulWidget {
 }
 
 class _AgregarActividadScreenState extends State<AgregarActividadScreen> {
-  String? selectedClasificacion;
-  TextEditingController nombreController = TextEditingController();
-  TextEditingController duracionController = TextEditingController();
+  TextEditingController nombrePlatilloController = TextEditingController();
+  String? classification; // Cambiado a String?
 
-  List<String> clasificaciones = ['Aeróbica', 'Anaeróbica', 'Yoga', 'Pilates', 'Estiramientos'];
+  List<String> clasificaciones = ["Trabajo", "Ejercicio", "Deporte", "Reposo", "Tareas del Hogar", "Conducción", "Estudio", "Actividades al Aire Libre", "Actividades Sociales"];
+  String? selectedClasificacion = "Ejercicio";
+  String datos = "ad";
+  late ActivitiesController controlador;
+
+  @override
+  void initState() {
+    super.initState(); // Asegúrate de llamar a super.initState() aquí
+    // Inicializar el controlador en el initState
+    controlador = ActivitiesController();
+  }
+
+  Future<void> addActivitie(String formData) async {
+    try {
+      final response = await http.post(
+        Uri.parse(backendUrl+'/api/Module4/CreateActivity'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: formData,
+      );
+
+      if (response.statusCode == 200) {
+        // Éxito: Navegar a la pantalla de inicio de sesión
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ActividadesScreen()),
+        );
+      } else {
+        // Error: Mostrar un SnackBar con el mensaje de error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error de servidor: ${response.statusCode}'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error al enviar los datos al backend: $e');
+      // Mostrar un SnackBar con el mensaje de error de conexión
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              'No se pudo conectar al backend. Verifica tu conexión de red o inténtalo más tarde.'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,24 +87,15 @@ class _AgregarActividadScreenState extends State<AgregarActividadScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Nombre de la Actividad:'),
+            Text('Nombre:'),
             TextField(
-              controller: nombreController,
+              controller: nombrePlatilloController,
               decoration: InputDecoration(
                 hintText: 'Ingrese el nombre de la actividad',
               ),
             ),
             SizedBox(height: 16.0),
-            Text('Duración (minutos):'),
-            TextField(
-              controller: duracionController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                hintText: 'Ingrese la duración en minutos',
-              ),
-            ),
-            SizedBox(height: 16.0),
-            Text('Clasificación de la Actividad:'),
+            Text('Clasificación:'),
             DropdownButton<String>(
               value: selectedClasificacion,
               items: clasificaciones.map((String clasificacion) {
@@ -61,6 +105,7 @@ class _AgregarActividadScreenState extends State<AgregarActividadScreen> {
                 );
               }).toList(),
               onChanged: (String? newValue) {
+                // Cambiado a String?
                 setState(() {
                   selectedClasificacion = newValue;
                 });
@@ -68,16 +113,23 @@ class _AgregarActividadScreenState extends State<AgregarActividadScreen> {
             ),
             SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: () {
-                // Aquí puedes agregar la lógica para registrar la actividad
-                // Utiliza nombreController.text, duracionController.text y selectedClasificacion
-                // para obtener los valores ingresados y seleccionados.
-                print('Nombre de la Actividad: ${nombreController.text}');
-                print('Duración (minutos): ${duracionController.text}');
-                print('Clasificación de la Actividad: $selectedClasificacion');
-              },
-              child: Text('Agregar Actividad'),
-            ),
+  onPressed: () async {
+    try {
+      String nombrePlatillo = nombrePlatilloController.text;
+     
+      String formData = controlador.AddActJSON(
+          nombrePlatilloController.text, selectedClasificacion);
+       print('Nombre del Platillo: $formData');   
+      await addActivitie(formData);
+    } catch (e, stackTrace) {
+      print('Error en el botón: $e');
+      print('Stack Trace: $stackTrace');
+    }
+  },
+  child: Text('Agregar Actividad'),
+),
+
+            
           ],
         ),
       ),
@@ -86,9 +138,7 @@ class _AgregarActividadScreenState extends State<AgregarActividadScreen> {
 
   @override
   void dispose() {
-    // Limpia los controladores cuando se destruye el widget para liberar recursos.
-    nombreController.dispose();
-    duracionController.dispose();
+    nombrePlatilloController.dispose();
     super.dispose();
   }
 }

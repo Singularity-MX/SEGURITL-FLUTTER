@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 100),
+                SizedBox(height: 200),
                 Image.asset(
                   'lib/assets/LogoRojo.png', // Ruta del logo
                   width: 120, // Ancho del logo
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
             bottom: 0,
             child: Container(
                 height: MediaQuery.of(context).size.height *
-                    0.54, // Altura del 30% de la pantalla
+                    0.40, // Altura del 30% de la pantalla
                 width: MediaQuery.of(context)
                     .size
                     .width, // Ancho del 100% de la pantalla

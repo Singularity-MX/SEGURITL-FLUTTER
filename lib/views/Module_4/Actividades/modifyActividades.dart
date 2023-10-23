@@ -1,77 +1,93 @@
 import 'package:flutter/material.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ModificarActividadScreen(),
-    );
-  }
-}
+import 'package:http/http.dart' as http;
+import '../../../configBackend.dart';
+import 'package:glucontrol_app/views/Module_4/Actividades/ActivitiesScreen.dart';
+import 'package:glucontrol_app/controllers/Module4/ActivitiesController.dart';
 
 class ModificarActividadScreen extends StatefulWidget {
+  final Map<String, dynamic> food; // Datos del alimento a editar
+
+  ModificarActividadScreen({required this.food});
+
   @override
-  _ModificarActividadScreenState createState() =>
-      _ModificarActividadScreenState();
+  _ModificarActividadScreenState createState() => _ModificarActividadScreenState();
 }
 
 class _ModificarActividadScreenState extends State<ModificarActividadScreen> {
-  String? selectedClasificacion;
-  TextEditingController nombreController = TextEditingController();
-  TextEditingController duracionController = TextEditingController();
+  // Controladores para los campos de edición
+  TextEditingController foodNameController = TextEditingController();
+  TextEditingController classificationController = TextEditingController();
+  String? classification; // Cambiado a String?
+  List<String> clasificaciones = ["Trabajo", "Ejercicio", "Deporte", "Reposo", "Tareas del Hogar", "Conducción", "Estudio", "Actividades al Aire Libre", "Actividades Sociales"];
+  String? selectedClasificacion = "Ejercicio";
+  late ActivitiesController controlador;
+  String aid="";
 
-  List<String> clasificaciones = ['Aeróbica', 'Anaeróbica', 'Yoga', 'Pilates', 'Estiramientos'];
+  @override
+  void initState() {
+    super.initState();
+    controlador = ActivitiesController();
+    // Inicializa los controladores con los datos actuales del alimento
+    foodNameController.text = widget.food['Activitie_name'];
+    classificationController.text = widget.food['Classification'];
+    aid=widget.food['AID'];
+  }
 
-  String? selectedActividad;
-  List<String> actividades = ['Correr', 'Nadar', 'Caminar', 'Bicicleta', 'Yoga'];
+  Future<void> ModifyActivitie(String formData) async {
+    try {
+      final response = await http.put(
+        Uri.parse(ApiConfig.backendUrl +
+            '/api/Module4/UpdateActivity/'+aid),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: formData,
+      );
+
+      if (response.statusCode == 200) {
+        // Éxito: Navegar a la pantalla de inicio de sesión
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ActividadesScreen()),
+        );
+      } else {
+        // Error: Mostrar un SnackBar con el mensaje de error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error de servidor: ${response.statusCode}'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error al enviar los datos al backend: $e');
+      // Mostrar un SnackBar con el mensaje de error de conexión
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              'No se pudo conectar al backend. Verifica tu conexión de red o inténtalo más tarde.'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Modificar Actividad'),
+        title: Text('Editar Alimento'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('Selecciona la Actividad a Modificar:'),
-            DropdownButton<String>(
-              value: selectedActividad,
-              items: actividades.map((String actividad) {
-                return DropdownMenuItem<String>(
-                  value: actividad,
-                  child: Text(actividad),
-                );
-              }).toList(),
-              onChanged: (String? newValue) {
-                setState(() {
-                  selectedActividad = newValue;
-                });
-              },
-            ),
-            SizedBox(height: 16.0),
-            Text('Nombre de la Actividad:'),
+          children: [
             TextField(
-              controller: nombreController,
-              decoration: InputDecoration(
-                hintText: 'Nombre actual: ${selectedActividad ?? ""}',
-              ),
+              controller: foodNameController,
+              decoration: InputDecoration(labelText: 'Nombre del act'),
             ),
+            
             SizedBox(height: 16.0),
-            Text('Duración (minutos):'),
-            TextField(
-              controller: duracionController,
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                hintText: 'Duración actual: ${selectedActividad ?? ""}',
-              ),
-            ),
-            SizedBox(height: 16.0),
-            Text('Clasificación de la Actividad:'),
+            Text('Clasificación:'),
             DropdownButton<String>(
               value: selectedClasificacion,
               items: clasificaciones.map((String clasificacion) {
@@ -81,35 +97,39 @@ class _ModificarActividadScreenState extends State<ModificarActividadScreen> {
                 );
               }).toList(),
               onChanged: (String? newValue) {
+                // Cambiado a String?
                 setState(() {
                   selectedClasificacion = newValue;
                 });
               },
             ),
-            SizedBox(height: 32.0),
+            SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                // Aquí puedes agregar la lógica para modificar la actividad
-                // Utiliza selectedActividad, nombreController.text, duracionController.text y selectedClasificacion
-                // para obtener los valores seleccionados y modificados.
-                print('Actividad a Modificar: $selectedActividad');
-                print('Nuevo Nombre de la Actividad: ${nombreController.text}');
-                print('Nueva Duración (minutos): ${duracionController.text}');
-                print('Nueva Clasificación de la Actividad: $selectedClasificacion');
+              onPressed: () async {
+                // Aquí debes enviar los datos actualizados al servidor
+                final updatedFoodData = {
+                  'Food_name': foodNameController.text,
+                  'Classification': selectedClasificacion,
+                };
+                // Llama a la función para enviar los datos actualizados al servidor
+                // Puedes usar http.put o http.post, dependiendo de tu API
+                // Asegúrate de manejar las respuestas y errores adecuadamente
+
+                try {
+                  String formData = controlador.AddActJSON(
+                      foodNameController.text, selectedClasificacion);
+
+                  await ModifyActivitie(formData);
+                } catch (e, stackTrace) {
+                  print('Error en el botón: $e');
+                  print('Stack Trace: $stackTrace');
+                }
               },
-              child: Text('Modificar Actividad'),
+              child: Text('Guardar Cambios'),
             ),
           ],
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    // Limpia los controladores cuando se destruye el widget para liberar recursos.
-    nombreController.dispose();
-    duracionController.dispose();
-    super.dispose();
   }
 }
