@@ -39,6 +39,9 @@ dependencies:
   flutter_svg: ^0.22.0
   intl: ^0.17.0 # Asegúrate de tener la última versión de intl
   crypto: ^3.0.1
+  charts_flutter: ^0.12.0
+  fl_chart: ^0.64.0
+  bubble_chart: ^0.4.0
   
 
 dev_dependencies:
@@ -76,6 +79,8 @@ flutter:
     - lib/assets/ICONS_CARD/cumpleaños.png
     - lib/assets/ICONS_CARD/medidas.png
     - lib/assets/ICONS_CARD/clave.png
+    - lib/assets/ICONS_CARD/food.png
+    - lib/assets/ICONS_CARD/actividades.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

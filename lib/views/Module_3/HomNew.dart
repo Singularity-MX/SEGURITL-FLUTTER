@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:glucontrol_app/views/Module_4/Alimentos/AlimentosScreen.dart';
 import 'package:glucontrol_app/views/Module_4/Actividades/ActivitiesScreen.dart';
-import 'package:glucontrol_app/views/Module_4/RegistroGlucosa.dart';
+import 'package:glucontrol_app/views/Module_4/Glucosa/RegistroGlucosa.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

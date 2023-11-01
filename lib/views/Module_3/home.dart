@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:glucontrol_app/views/Module_4/Alimentos/AlimentosScreen.dart';
 import 'package:glucontrol_app/views/Module_4/Actividades/ActivitiesScreen.dart';
-import 'package:glucontrol_app/views/Module_4/RegistroGlucosa.dart';
+import 'package:glucontrol_app/views/Module_4/Glucosa/GlucosaScreen.dart';
 import 'package:glucontrol_app/views/Module_1/info_screen.dart';
+
+import '../Module_5/EstadisticaScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -52,7 +54,7 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 // Navega a la pantalla de glucosa
                 Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => RegistroGlucosaScreen(),
+                  builder: (context) => GlucosaScreen(),
                 ));
               },
             ),
@@ -62,7 +64,7 @@ class HomeScreen extends StatelessWidget {
               onPressed: () {
                 // Navega a la pantalla de estadísticas
                 Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => EstadisticasScreen(),
+                  builder: (context) => GlucoseChartScreen(),
                 ));
               },
             ),
