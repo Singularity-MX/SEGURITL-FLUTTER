@@ -105,10 +105,9 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           // Fondo con imagen
           Image.asset(
-            'lib/assets/fondoLogin.jpg', // Ruta de la imagen de fondo
+            'lib/assets/fondoLog.png', // Ruta de la imagen de fondo
             fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
+            width: MediaQuery.of(context).size.width ,
           ),
 
           // Logo en el centro
@@ -117,12 +116,8 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 200),
-                Image.asset(
-                  'lib/assets/LogoRojo.png', // Ruta del logo
-                  width: 120, // Ancho del logo
-                  height: 120, // Alto del logo
-                ),
+               
+                
               ],
             ),
           ),
@@ -132,14 +127,13 @@ class _LoginPageState extends State<LoginPage> {
             right: 0,
             bottom: 0,
             child: Container(
-                height: MediaQuery.of(context).size.height *
-                    0.40, // Altura del 30% de la pantalla
+                height: MediaQuery.of(context).size.height * 0.55, // Altura del 30% de la pantalla
                 width: MediaQuery.of(context)
                     .size
                     .width, // Ancho del 100% de la pantalla
                 padding: EdgeInsets.all(20.0),
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 49, 49, 49),
+                  color: Color.fromARGB(255, 233, 233, 233),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(0.0),
                     topRight: Radius.circular(0.0),
@@ -157,31 +151,40 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
+                    SizedBox(height: 10),
                     Text(
                       'Inicia Sesión',
                       style: TextStyle(
                         fontSize: 22,
-                        color: Color.fromRGBO(
-                            255, 255, 255, 1), // Color de la línea
-                        fontWeight: FontWeight.w200, // Fuente Extra Light
+                        color: Color.fromARGB(255, 41, 41, 41),// Color de la línea
+                        fontWeight: FontWeight.w600, // Fuente Extra Light
                       ),
                       textAlign: TextAlign.justify, // Justificar el texto
                     ),
-                    SizedBox(height: 20), // Espacio entre el texto y la línea
+                    SizedBox(height: 30), // Espacio entre el texto y la línea
                     Divider(
                       height: 1, // Altura de la línea
                       color:
-                          Color.fromRGBO(247, 247, 247, 1), // Color de la línea
+                          Color.fromARGB(255, 41, 41, 41),// Color de la línea
                     ),
-                    
-                    SizedBox(height: 20),
+                      SizedBox(height: 25),
+                    Text(
+                      'Welcome to Glucontrol',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 41, 41, 41),// Color de la línea
+                        fontWeight: FontWeight.w300, // Fuente Extra Light
+                      ),
+                      textAlign: TextAlign.justify, // Justificar el texto
+                    ),
+                    SizedBox(height: 30),
                     Container(
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: TextField(
                         controller: _emailController, // Asignar el controlador
                         style: TextStyle(
                           fontSize: 18,
-                          color: Color.fromARGB(255, 175, 175, 175),
+                          color: Color.fromARGB(255, 41, 41, 41),
                           letterSpacing: 0.5,
                         ),
                         decoration: InputDecoration(
@@ -189,10 +192,10 @@ class _LoginPageState extends State<LoginPage> {
                               vertical: 10, horizontal: 20),
                           hintText: 'example@example.com',
                           hintStyle: TextStyle(
-                            color: Color.fromARGB(255, 175, 175, 175),
+                            color: Color.fromARGB(255, 41, 41, 41),
                           ),
                           filled: true,
-                          fillColor: Color.fromARGB(255, 78, 78, 78),
+                          fillColor: Color.fromARGB(255, 212, 212, 212),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,
@@ -200,12 +203,12 @@ class _LoginPageState extends State<LoginPage> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
-                              color: Color.fromARGB(255, 175, 175, 175),
+                              color: Color.fromARGB(255, 41, 41, 41),
                             ),
                           ),
                           prefixIcon: Icon(
                             Icons.person_outlined,
-                            color: Color(0xFF777777),
+                            color: Color.fromARGB(255, 41, 41, 41),
                           ),
                         ),
                       ),
@@ -220,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: true,
                         style: TextStyle(
                           fontSize: 18,
-                          color: Color.fromARGB(255, 175, 175, 175),
+                          color: Color.fromARGB(255, 41, 41, 41),
                           letterSpacing: 0.5,
                         ),
                         decoration: InputDecoration(
@@ -228,10 +231,10 @@ class _LoginPageState extends State<LoginPage> {
                               vertical: 10, horizontal: 20),
                           hintText: '**********',
                           hintStyle: TextStyle(
-                            color: Color.fromARGB(255, 175, 175, 175),
+                            color: Color.fromARGB(255, 41, 41, 41),
                           ),
                           filled: true,
-                          fillColor: Color.fromARGB(255, 78, 78, 78),
+                          fillColor: Color.fromARGB(255, 212, 212, 212),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,
@@ -239,23 +242,23 @@ class _LoginPageState extends State<LoginPage> {
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(
-                              color: Color.fromARGB(255, 175, 175, 175),
+                              color: Color.fromARGB(255, 41, 41, 41),
                             ),
                           ),
                           prefixIcon: Icon(
                             Icons.person_outlined,
-                            color: Color(0xFF777777),
+                            color: Color.fromARGB(255, 41, 41, 41),
                           ),
                         ),
                       ),
                     ),
 
       
-                    SizedBox(height: 20), // Espacio entre el texto y la línea
+                    SizedBox(height: 30), // Espacio entre el texto y la línea
                     Divider(
                       height: 1, // Altura de la línea
                       color:
-                          Color.fromRGBO(247, 247, 247, 1), // Color de la línea
+                          Color.fromARGB(255, 41, 41, 41), // Color de la línea
                     ),
                     SizedBox(
                         height: 30), // Espacio entre la línea y los botones
@@ -268,8 +271,30 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Text('Iniciar sesión'),
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(
-                            30, 152, 222, 1), // Color de fondo del botón
+                        primary: Color.fromRGBO(255, 52, 52, 1), // Color de fondo del botón
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              10.0), // Radio de esquinas de 15
+                        ),
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width *
+                              0.8, // Ancho del 70% de la pantalla
+                          43, // Altura de 43
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                        height: 10), // Espacio entre la línea y los botones
+                    ElevatedButton(
+                      onPressed: () async {
+                        String formData = CrearJSON(
+                            _emailController.text, _passwordController.text);
+                        //hacer el login
+                        await Login(formData);
+                      },
+                      child: Text('Regresar'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(43, 43, 43, 1), // Color de fondo del botón
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               10.0), // Radio de esquinas de 15

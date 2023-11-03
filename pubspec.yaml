@@ -81,6 +81,14 @@ flutter:
     - lib/assets/ICONS_CARD/clave.png
     - lib/assets/ICONS_CARD/food.png
     - lib/assets/ICONS_CARD/actividades.png
+    - lib/assets/backgroundSplashScreen.png
+    - lib/assets/fondoLog.png
+    - lib/assets/FondoMenu.png
+    - lib/assets/ICONS_CARD/glucosaIcon.png
+    - lib/assets/ICONS_CARD/comidasIcon.png
+    - lib/assets/ICONS_CARD/actividadesIcon.png
+    - lib/assets/ICONS_CARD/statsIcon.png
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
