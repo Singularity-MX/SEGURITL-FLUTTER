@@ -1,4 +1,4 @@
-# glucontrol_app
+# seguritl
 
 A new Flutter project.
 
