@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> Login(String formData) async {
     try {
       final response = await http.post(
-        Uri.parse(backendUrl + '/api/Module2/Login'),
+        Uri.parse(backendUrl + '/api/users/login'),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -88,8 +88,8 @@ class _LoginPageState extends State<LoginPage> {
 
     //crear el JSON
     Map<String, dynamic> jsonObject = {
-      "Email": email,
-      "Password": hashedPassword,
+      "email": email,
+      "password": pass,
     };
 
     // Convertir el Map en una cadena JSON
@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                       SizedBox(height: 25),
                     Text(
-                      'Welcome to Glucontrol',
+                      'Welcome to SEGURITL',
                       style: TextStyle(
                         fontSize: 20,
                         color: Color.fromARGB(255, 41, 41, 41),// Color de la línea
@@ -271,7 +271,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Text('Iniciar sesión'),
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(255, 52, 52, 1), // Color de fondo del botón
+                        primary: Color.fromRGBO(57, 91, 163, 1), // Color de fondo del botón
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               10.0), // Radio de esquinas de 15
@@ -283,29 +283,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                        height: 10), // Espacio entre la línea y los botones
-                    ElevatedButton(
-                      onPressed: () async {
-                        String formData = CrearJSON(
-                            _emailController.text, _passwordController.text);
-                        //hacer el login
-                        await Login(formData);
-                      },
-                      child: Text('Regresar'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(43, 43, 43, 1), // Color de fondo del botón
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              10.0), // Radio de esquinas de 15
-                        ),
-                        minimumSize: Size(
-                          MediaQuery.of(context).size.width *
-                              0.8, // Ancho del 70% de la pantalla
-                          43, // Altura de 43
-                        ),
-                      ),
-                    ),
+                    
                   ],
                 )),
           ),

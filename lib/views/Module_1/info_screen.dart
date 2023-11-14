@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'info_menu.dart'; // Importa la página InfoMenu
 import 'package:glucontrol_app/test/viewTest.dart';
+import 'package:glucontrol_app/views/Module_2/login.dart';
 
 class InfoScreen extends StatelessWidget {
   @override
@@ -28,19 +29,7 @@ class InfoScreen extends StatelessWidget {
                   height: 180, // Alto del logo
                 ),
                 SizedBox(height: 30),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.65, // Ancho del 65% de la pantalla
-                  alignment: Alignment.center, // Centrar el texto
-                  child: Text(
-                    'Glucontrol es una app que te ayudará a tener un mejor control de tu glucosa. ',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w200, // Fuente Extra Light
-                    ),
-                    textAlign: TextAlign.justify, // Justificar el texto
-                  ),
-                ),
+                
               ],
             ),
           ),
@@ -73,7 +62,7 @@ class InfoScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    '¿Por que no le hechas un vistazo?',
+                    'Menú de Inicio',
                     style: TextStyle(
                       fontSize: 16,
                       color: Colors.black,
@@ -87,10 +76,10 @@ class InfoScreen extends StatelessWidget {
     // Navegar a la página InfoMenu
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => InfoMenu()),
+      MaterialPageRoute(builder: (context) => LoginApp()),
     );
   },
-  child: Text('Ir al Menú de Información'),
+  child: Text('Iniciar'),
   style: ElevatedButton.styleFrom(
     primary: Colors.blue, // Color de fondo del botón
     shape: RoundedRectangleBorder(
@@ -111,7 +100,7 @@ ElevatedButton(
       MaterialPageRoute(builder: (context) => ConfigScreen()),
     );
   },
-  child: Text('test'),
+  child: Text('Backend Config'),
   style: ElevatedButton.styleFrom(
     primary: Colors.blue, // Color de fondo del botón
     shape: RoundedRectangleBorder(
