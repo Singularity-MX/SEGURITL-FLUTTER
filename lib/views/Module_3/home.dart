@@ -12,6 +12,7 @@ import '../../configBackend.dart';
 import '../ACCESOS/accesos.dart';
 import '../Incidencias/addIncidencias.dart';
 import '../Module_5/EstadisticaScreen.dart';
+import '../RONDINES/rondines.dart';
 
 
 void main() => runApp(MyApp());
@@ -297,6 +298,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         70,
                         70,
                         () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return MyHomePage(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
+                            },
+                          ));
                   
                         },
                       )
