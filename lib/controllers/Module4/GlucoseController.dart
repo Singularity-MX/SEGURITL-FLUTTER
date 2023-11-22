@@ -1,5 +1,5 @@
-import 'package:glucontrol_app/models/Module1/RegistroModel.dart';
-import 'package:glucontrol_app/tools/password_hash.dart';
+import 'package:seguritl/models/Module1/RegistroModel.dart';
+import 'package:seguritl/tools/password_hash.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../../configBackend.dart';

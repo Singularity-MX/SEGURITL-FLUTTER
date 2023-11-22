@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:glucontrol_app/views/Module_3/home.dart';
+import 'package:seguritl/views/Module_3/home.dart';
 import 'package:http/http.dart' as http;
-import 'package:glucontrol_app/configBackend.dart';
-import 'package:glucontrol_app/tools/password_hash.dart';
+import 'package:seguritl/configBackend.dart';
+import 'package:seguritl/tools/password_hash.dart';
 import 'dart:convert';
 
 void main() => runApp(LoginApp());

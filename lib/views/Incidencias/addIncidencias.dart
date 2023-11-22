@@ -3,14 +3,14 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:glucontrol_app/views/Module_3/home.dart';
+import 'package:seguritl/views/Module_3/home.dart';
 import 'package:intl/intl.dart'; // Importa la librería intl para dar formato a la fecha
-import 'package:glucontrol_app/models/Module1/RegistroModel.dart';
-import 'package:glucontrol_app/controllers/Module4/ActivitiesController.dart';
-import 'package:glucontrol_app/views/Module_2/login.dart';
+import 'package:seguritl/models/Module1/RegistroModel.dart';
+import 'package:seguritl/controllers/Module4/ActivitiesController.dart';
+import 'package:seguritl/views/Module_2/login.dart';
 import 'package:http/http.dart' as http;
 import '../../../configBackend.dart';
-import 'package:glucontrol_app/views/Module_4/Actividades/ActivitiesScreen.dart';
+import 'package:seguritl/views/Module_4/Actividades/ActivitiesScreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,20 +32,45 @@ class _AgregarIncidenciaState extends State<AgregarIncidencia> {
   TextEditingController comentarioController = TextEditingController();
   String? classification; // Cambiado a String?
 
-  List<String> clasificaciones = ["Trabajo", "Ejercicio", "Deporte", "Reposo", "Tareas del Hogar", "Conducción", "Estudio", "Actividades al Aire Libre", "Actividades Sociales"];
+  List<String> clasificaciones = [
+    "Trabajo",
+    "Ejercicio",
+    "Deporte",
+    "Reposo",
+    "Tareas del Hogar",
+    "Conducción",
+    "Estudio",
+    "Actividades al Aire Libre",
+    "Actividades Sociales"
+  ];
   String? selectedClasificacion = "Ejercicio";
   String datos = "ad";
   late ActivitiesController controlador;
 
- String? selectedTipo = "Infraestructura";
+  String? selectedTipo = "Infraestructura";
   String? selectedSubtipo = "Eléctrico";
 
-  List<String> tipos = ["Infraestructura", "Siniestros o contingencia", "Seguridad", "Otro"];
-  
+  List<String> tipos = [
+    "Infraestructura",
+    "Siniestros o contingencia",
+    "Seguridad",
+    "Otro"
+  ];
+
   // Mapa de subtipos para cada tipo
   Map<String, List<String>> subtipos = {
-    "Infraestructura": ["Eléctrico", "Hidráulico", "Infraestructura (ej. reportar daños de alguna instalación o deterioro)", "Hidrosanitario"],
-    "Siniestros o contingencia": ["Incendio", "Fenómenos hidrometeorológicos", "Temblor o terremoto", "Sanitaria (pandemia, plagas)"],
+    "Infraestructura": [
+      "Eléctrico",
+      "Hidráulico",
+      "Infraestructura (ej. reportar daños de alguna instalación o deterioro)",
+      "Hidrosanitario"
+    ],
+    "Siniestros o contingencia": [
+      "Incendio",
+      "Fenómenos hidrometeorológicos",
+      "Temblor o terremoto",
+      "Sanitaria (pandemia, plagas)"
+    ],
     "Seguridad": ["Robo", "Asaltos", "Drogas", "Alcoholismo", "Violencia"],
     "Otro": ["Otro"]
   };
@@ -61,10 +86,10 @@ class _AgregarIncidenciaState extends State<AgregarIncidencia> {
     //crear el JSON
     Map<String, dynamic> jsonObject = {
       "tipo": tipo,
-    "subtipo":subtipo,
-    "comentario": comentario,
-    "foto": foto,
-    "user_id": user_id
+      "subtipo": subtipo,
+      "comentario": comentario,
+      "foto": foto,
+      "user_id": user_id
     };
 
     // Convertir el Map en una cadena JSON
@@ -72,11 +97,11 @@ class _AgregarIncidenciaState extends State<AgregarIncidencia> {
 
     return formData;
   }
-  
+
   Future<void> addIncidencia(String formData) async {
     try {
       final response = await http.post(
-        Uri.parse(backendUrl+'/api/incidencias/create'),
+        Uri.parse(backendUrl + '/api/incidencias/create'),
         headers: {
           'Content-Type': 'application/json',
         },
@@ -116,7 +141,7 @@ class _AgregarIncidenciaState extends State<AgregarIncidencia> {
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+    return Scaffold(
       backgroundColor: Color(0xFFE1E1E1),
       body: Column(
         children: <Widget>[
@@ -152,7 +177,7 @@ class _AgregarIncidenciaState extends State<AgregarIncidencia> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  
+
                   Container(
                     width: double.infinity,
                     child: Center(
@@ -167,103 +192,96 @@ class _AgregarIncidenciaState extends State<AgregarIncidencia> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  
-              Container(
-              width: double.infinity,
-              child: Text(
-                '¿Qué tipo de incidencia es?',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF4F4F4F),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(height: 16.0),
 
-
-
-
-             Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: DropdownButton<String>(
-                value: selectedTipo,
-                isExpanded: true,
-                icon: Icon(
-                  Icons.arrow_drop_down,
-                  color: Color(0xFF777777),
-                ),
-                items: tipos.map((String tipo) {
-                  return DropdownMenuItem<String>(
-                    value: tipo,
-                    child: Center(
-                      child: Text(tipo),
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      '¿Qué tipo de incidencia es?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFF4F4F4F),
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedTipo = newValue;
-                    selectedSubtipo = subtipos[selectedTipo!]![0]; // Establecer el primer subtipo por defecto
-                  });
-                },
-                underline: Container(),
-              ),
-            ),
+                  ),
+                  SizedBox(height: 16.0),
 
-
-
-
-
-
-SizedBox(height: 16.0),
-            Container(
-              width: double.infinity,
-              child: Text(
-                '¿Qué subtipo de incidencia es?',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF4F4F4F),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(height: 16.0),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.8,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: DropdownButton<String>(
-                value: selectedSubtipo,
-                isExpanded: true,
-                icon: Icon(
-                  Icons.arrow_drop_down,
-                  color: Color(0xFF777777),
-                ),
-                items: subtipos[selectedTipo!]!.map((String subtipo) {
-                  return DropdownMenuItem<String>(
-                    value: subtipo,
-                    child: Center(
-                      child: Text(subtipo),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                  );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    selectedSubtipo = newValue;
-                  });
-                },
-                underline: Container(),
-              ),
-            ),
+                    child: DropdownButton<String>(
+                      value: selectedTipo,
+                      isExpanded: true,
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Color(0xFF777777),
+                      ),
+                      items: tipos.map((String tipo) {
+                        return DropdownMenuItem<String>(
+                          value: tipo,
+                          child: Center(
+                            child: Text(tipo),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedTipo = newValue;
+                          selectedSubtipo = subtipos[selectedTipo!]![
+                              0]; // Establecer el primer subtipo por defecto
+                        });
+                      },
+                      underline: Container(),
+                    ),
+                  ),
 
-SizedBox(height: 16.0),
+                  SizedBox(height: 16.0),
+                  Container(
+                    width: double.infinity,
+                    child: Text(
+                      '¿Qué subtipo de incidencia es?',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Color(0xFF4F4F4F),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: DropdownButton<String>(
+                      value: selectedSubtipo,
+                      isExpanded: true,
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Color(0xFF777777),
+                      ),
+                      items: subtipos[selectedTipo!]!.map((String subtipo) {
+                        return DropdownMenuItem<String>(
+                          value: subtipo,
+                          child: Center(
+                            child: Text(subtipo),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedSubtipo = newValue;
+                        });
+                      },
+                      underline: Container(),
+                    ),
+                  ),
+
+                  SizedBox(height: 16.0),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: TextField(
@@ -302,9 +320,7 @@ SizedBox(height: 16.0),
                   ),
                   SizedBox(height: 16.0),
                   // ... Otros widgets antes del formulario
-                
-                  
-                  
+
                   // ... Otros widgets después del formulario
                 ],
               ),
@@ -319,8 +335,7 @@ SizedBox(height: 16.0),
                   onPressed: () async {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
@@ -339,7 +354,9 @@ SizedBox(height: 16.0),
                       ),
                       Text(
                         ' Regresar',
-                        style: TextStyle(fontSize: 18, color: const Color.fromARGB(255, 27, 27, 27)),
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: const Color.fromARGB(255, 27, 27, 27)),
                       ),
                     ],
                   ),
@@ -367,9 +384,13 @@ SizedBox(height: 16.0),
                         return; // Salir de la función sin continuar
                       }
 
-          
-                      String formData = AddActJSON(selectedTipo.toString(), selectedSubtipo.toString(), comentario, "admin", "foto");
-                     
+                      String formData = AddActJSON(
+                          selectedTipo.toString(),
+                          selectedSubtipo.toString(),
+                          comentario,
+                          "admin",
+                          "foto");
+
                       await addIncidencia(formData);
                     } catch (e, stackTrace) {
                       print('Error en el botón: $e');

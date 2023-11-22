@@ -2,10 +2,10 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:glucontrol_app/views/Module_4/Alimentos/AlimentosScreen.dart';
-import 'package:glucontrol_app/views/Module_4/Actividades/ActivitiesScreen.dart';
-import 'package:glucontrol_app/views/Module_4/Glucosa/GlucosaScreen.dart';
-import 'package:glucontrol_app/views/Module_1/info_screen.dart';
+import 'package:seguritl/views/Module_4/Alimentos/AlimentosScreen.dart';
+import 'package:seguritl/views/Module_4/Actividades/ActivitiesScreen.dart';
+import 'package:seguritl/views/Module_4/Glucosa/GlucosaScreen.dart';
+import 'package:seguritl/views/Module_1/info_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import '../../configBackend.dart';
@@ -13,7 +13,6 @@ import '../ACCESOS/accesos.dart';
 import '../Incidencias/addIncidencias.dart';
 import '../Module_5/EstadisticaScreen.dart';
 import '../RONDINES/rondines.dart';
-
 
 void main() => runApp(MyApp());
 
@@ -36,10 +35,7 @@ DateTime now = DateTime.now();
 // Formatear la hora en un formato específico (por ejemplo, HH:mm:ss)
 String formattedTime = DateFormat('HH:mm').format(now);
 
-
-
 class _HomeScreenState extends State<HomeScreen> {
-
   // Obtener la hora actual
 
   List<dynamic> info = [];
@@ -48,7 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     // Llamar a la función para obtener alimentos cuando se carga la pantalla
-    
   }
 
   Future<void> getHomeInfo() async {
@@ -286,9 +281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         140,
                         70,
                         70,
-                        () {
-                          
-                        },
+                        () {},
                       ),
                       CardWithImageAndText(
                         'lib/assets/ICONS_CARD/statsIcon.png',
@@ -303,7 +296,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               return MyHomePage(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
                             },
                           ));
-                  
                         },
                       )
                     ],

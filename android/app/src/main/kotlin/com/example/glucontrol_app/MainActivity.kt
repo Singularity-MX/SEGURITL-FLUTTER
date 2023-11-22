@@ -1,4 +1,4 @@
-package com.example.glucontrol_app
+package com.example.seguritl
 
 import io.flutter.embedding.android.FlutterActivity
 

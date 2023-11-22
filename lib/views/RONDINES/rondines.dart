@@ -65,13 +65,20 @@ AUDITORIO (8)
 ENTRE AUDITORIO Y CANCHA (9)
 21.108607, -101.625313
 
-, 
+, 21.155689, -101.669075
  */
 
   List<Checkpoint> checkpoints = [
-    Checkpoint(latitude: 21.1556, longitude: -101.6690), // Punto 1
-    Checkpoint(latitude: 37.7749, longitude: -122.4094), // Punto 2
-    Checkpoint(latitude: 37.7749, longitude: -122.3994), // Punto 3
+    //Checkpoint(latitude: 21.155689, longitude: -101.669075), // Punto casa 
+    Checkpoint(latitude: 21.107534, longitude: -101.627544), // Punto 1
+    Checkpoint(latitude: 21.108248, longitude: -101.629531), // Punto 2
+    Checkpoint(latitude: 21.109302, longitude: -101.629154), // Punto 3
+    Checkpoint(latitude: 21.109482, longitude: -101.627891), // Punto 4
+    Checkpoint(latitude: 21.109890, longitude: -101.629947), // Punto 5
+    Checkpoint(latitude: 21.109880, longitude: -101.628979), // Punto 6
+    Checkpoint(latitude: 21.110372, longitude: -101.627834), // Punto 7
+    Checkpoint(latitude: 21.109476, longitude: -101.625800), // Punto 8
+    Checkpoint(latitude: 21.108607, longitude: -101.625313), // Punto 9
     // Agrega más puntos según sea necesario
   ];
 
@@ -164,7 +171,7 @@ ENTRE AUDITORIO Y CANCHA (9)
   void validateCheckpoint() {
     if (currentCheckpointIndex < checkpoints.length) {
       Checkpoint currentCheckpoint = checkpoints[currentCheckpointIndex];
-      double tolerance = 0.0001; // Tolerancia para la comparación de coordenadas
+      double tolerance = 0.0008; // Tolerancia para la comparación de coordenadas
 
       if ((currentLatitude - currentCheckpoint.latitude).abs() < tolerance &&
           (currentLongitude - currentCheckpoint.longitude).abs() < tolerance) {

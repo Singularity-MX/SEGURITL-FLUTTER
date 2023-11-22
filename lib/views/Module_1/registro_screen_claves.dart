@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart'; // Importa la librería intl para dar formato a la fecha
-import 'package:glucontrol_app/models/Module1/RegistroModel.dart';
-import 'package:glucontrol_app/controllers/Module1/RegisterUserController.dart';
-import 'package:glucontrol_app/views/Module_2/login.dart';
+import 'package:seguritl/models/Module1/RegistroModel.dart';
+import 'package:seguritl/controllers/Module1/RegisterUserController.dart';
+import 'package:seguritl/views/Module_2/login.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
