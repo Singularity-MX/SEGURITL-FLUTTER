@@ -2,18 +2,23 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:seguritl/views/Accesos_admin/AccesosScreen.dart';
 import 'package:seguritl/views/CHAT/chatView.dart';
+import 'package:seguritl/views/Incidencias/InicenciasScreen.dart';
 import 'package:seguritl/views/Module_4/Alimentos/AlimentosScreen.dart';
 import 'package:seguritl/views/Module_4/Actividades/ActivitiesScreen.dart';
 import 'package:seguritl/views/Module_4/Glucosa/GlucosaScreen.dart';
 import 'package:seguritl/views/Module_1/info_screen.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:seguritl/views/RONDINES/RondinesScreen.dart';
+import 'package:seguritl/views/Usuarios/UsersScreen.dart';
 import '../../configBackend.dart';
 import '../ACCESOS/accesos.dart';
 import '../Incidencias/addIncidencias.dart';
 import '../Module_5/EstadisticaScreen.dart';
 import '../RONDINES/rondines.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -21,17 +26,22 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      home: HomeScreenAdmin(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
+class HomeScreenAdmin extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenAdminState createState() => _HomeScreenAdminState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+DateTime now = DateTime.now();
+
+// Formatear la hora en un formato específico (por ejemplo, HH:mm:ss)
+String formattedTime = DateFormat('HH:mm').format(now);
+
+class _HomeScreenAdminState extends State<HomeScreenAdmin> {
   // Obtener la hora actual
 
   List<dynamic> info = [];
@@ -63,8 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DateTime now = DateTime.now();
-    String formattedTime = DateFormat('HH:mm').format(now);
     return Scaffold(
       body: Stack(
         children: [
@@ -147,57 +155,14 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
 
-          Positioned(
-            top: 130,
-            left: MediaQuery.of(context).size.width * 0.025,
-            right: MediaQuery.of(context).size.width * 0.025,
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.95,
-              height: 200,
-              decoration: BoxDecoration(
-                color: Color.fromARGB(76, 0, 0, 0),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0),
-                  bottomLeft: Radius.circular(20.0),
-                  bottomRight: Radius.circular(20.0),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0),
-                  topRight: Radius.circular(20.0),
-                  bottomLeft: Radius.circular(20.0),
-                  bottomRight: Radius.circular(20.0),
-                ),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        formattedTime.isNotEmpty
-                            ? '$formattedTime'
-                            : '0', // Puedes ajustar la condición según tu lógica
-                        style: TextStyle(
-                          fontSize: 100,
-                          color: const Color.fromARGB(255, 255, 255, 255),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
+       
 
           Positioned(
             left: 0,
             right: 0,
             bottom: 0,
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.60,
+              height: MediaQuery.of(context).size.height * 0.80,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(20.0),
               decoration: BoxDecoration(
@@ -220,7 +185,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   SizedBox(height: 10),
                   Text(
-                    'Welcome to SEGURITL',
+                    'Welcome to Administrator',
                     style: TextStyle(
                       fontSize: 22,
                       color: Color.fromARGB(255, 41, 41, 41),
@@ -228,6 +193,45 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     textAlign: TextAlign.justify,
                   ),
+                  SizedBox(height: 20),
+                  Wrap(
+                    alignment:
+                        WrapAlignment.center, // Alinea las filas en el centro
+                    spacing: 13.0, // Espaciado entre las tarjetas
+                    children: [
+                      CardWithImageAndText(
+                        'lib/assets/ICONS_CARD/usersIcon.png',
+                        'Usuarios',
+                        140,
+                        140,
+                        70,
+                        70,
+                        () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return UsersScreen(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
+                            },
+                          ));
+                        },
+                      ),
+                      CardWithImageAndText(
+                        'lib/assets/ICONS_CARD/estadisticas.png',
+                        'Estadísticas',
+                        140,
+                        140,
+                        70,
+                        70,
+                        () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return AgregarIncidencia(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
+                            },
+                          ));
+                        },
+                      ),
+                    ],
+                  ),
+
                   SizedBox(height: 20),
                   Wrap(
                     alignment:
@@ -244,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return QRValidationScreen(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
+                              return AccesosScreen(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
                             },
                           ));
                         },
@@ -259,13 +263,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return AgregarIncidencia(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
+                              return incidenciasScreen(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
                             },
                           ));
                         },
                       ),
                     ],
                   ),
+
                   SizedBox(height: 10),
                   Wrap(
                     alignment:
@@ -279,11 +284,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         140,
                         70,
                         70,
-                        () {Navigator.of(context).push(MaterialPageRoute(
+                        () {
+                             Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
                               return ChatScreen(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
                             },
-                          ));},
+                          ));
+                        },
                       ),
                       CardWithImageAndText(
                         'lib/assets/ICONS_CARD/statsIcon.png',
@@ -295,7 +302,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return MyHomePage(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
+                              return RondinesScreen(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
                             },
                           ));
                         },

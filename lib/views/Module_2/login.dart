@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:seguritl/configBackend.dart';
 import 'package:seguritl/tools/password_hash.dart';
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:seguritl/views/Module_3/home_admin.dart';
 
 void main() => runApp(LoginApp());
 
@@ -37,13 +39,40 @@ class _LoginPageState extends State<LoginPage> {
         body: formData,
       );
 
-      if (response.statusCode == 200) {
-        // Éxito: Navegar a la pantalla de inicio de sesión
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+
+      if (responseData.containsKey('user')) {
+        final Map<String, dynamic> userData = responseData['user'];
+
+        // Verificar el tipo de usuario
+        if (userData.containsKey('tipo')) {
+          final String userType = userData['tipo'];
+
+          final String userId = userData['id'];
+final String emailUser = userData['email'];
+          // Almacenar el ID del usuario en SharedPreferences
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setString('userId', userId);
+          prefs.setString('emailUser', emailUser);
+
+
+          if (userType == 'Guardia') {
+            // Usuario tipo guardia: Navegar a la pantalla HomeScreen
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          } else if (userType == 'Administrador') {
+            // Usuario tipo admin: Navegar a otra pantalla
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreenAdmin()),
+            );
+          }
+        }
       }
+    }
       if (response.statusCode == 401) {
         // Éxito: Navegar a la pantalla de inicio de sesión
         ScaffoldMessenger.of(context).showSnackBar(
@@ -269,11 +298,7 @@ class _LoginPageState extends State<LoginPage> {
                         String formData = CrearJSON(
                             _emailController.text, _passwordController.text);
                         //hacer el login
-                        //await Login(formData);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
-                        );
+                        await Login(formData);
                       },
                       child: Text('Iniciar sesión'),
                       style: ElevatedButton.styleFrom(

@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:seguritl/views/Incidencias/InicenciasScreen.dart';
 import 'package:seguritl/views/Module_3/home.dart';
 import 'package:intl/intl.dart'; // Importa la librería intl para dar formato a la fecha
 import 'package:seguritl/models/Module1/RegistroModel.dart';
@@ -21,17 +22,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: AgregarIncidencia(),
+      home: AddIncidenciaAdmin(),
     );
   }
 }
 
-class AgregarIncidencia extends StatefulWidget {
+class AddIncidenciaAdmin extends StatefulWidget {
   @override
-  _AgregarIncidenciaState createState() => _AgregarIncidenciaState();
+  _AddIncidenciaAdminState createState() => _AddIncidenciaAdminState();
 }
 
-class _AgregarIncidenciaState extends State<AgregarIncidencia> {
+class _AddIncidenciaAdminState extends State<AddIncidenciaAdmin> {
   TextEditingController comentarioController = TextEditingController();
   String? classification; // Cambiado a String?
 
@@ -368,7 +369,7 @@ SizedBox(height: 16.0),
                   onPressed: () async {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => incidenciasScreen()),
                     );
                   },
                   style: ElevatedButton.styleFrom(
