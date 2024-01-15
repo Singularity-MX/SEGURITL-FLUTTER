@@ -17,12 +17,15 @@ class Checkpoint {
   double latitude;
   double longitude;
   bool validated;
+  DateTime validationTime; // Nueva propiedad para almacenar la hora de validación
 
-  Checkpoint(
-      {required this.latitude,
-      required this.longitude,
-      this.validated = false});
+  Checkpoint({
+    required this.latitude,
+    required this.longitude,
+    this.validated = false,
+  }) : validationTime = DateTime.now(); // Inicializar con la hora actual
 }
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -126,6 +129,8 @@ ENTRE AUDITORIO Y CANCHA (9)
     */
     // Agrega más puntos según sea necesario
   ];
+
+  List<DateTime> validationTimes = []; // Lista para almacenar las horas de validación
 
   int currentCheckpointIndex = 0;
 
@@ -276,6 +281,8 @@ ENTRE AUDITORIO Y CANCHA (9)
         // Coordenadas válidas
         setState(() {
           currentCheckpoint.validated = true;
+          currentCheckpoint.validationTime = DateTime.now();
+          validationTimes.add(currentCheckpoint.validationTime); // Agregar la hora a la lista
           currentCheckpointIndex++;
         });
         showSuccessMessage("Validación Exitosa", currentCheckpointIndex);
@@ -395,6 +402,81 @@ ENTRE AUDITORIO Y CANCHA (9)
       );
 
       if (response.statusCode == 200) {
+         final Map<String, dynamic> responseData = json.decode(response.body);
+        final String rondinID = responseData['id'];
+        final String uid = responseData['user_id'];
+        ///almacenar en la base de datos los detalles del rondin
+        ///
+        AddDetalles(rondinID, uid );
+/*
+        // Éxito: Navegar a la pantalla de inicio de sesión
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Registrado con éxito'),
+          ),
+        );
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+          
+        );
+        */
+      } else {
+        // Error: Mostrar un SnackBar con el mensaje de error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error de servidor: ${response.statusCode}'),
+          ),
+        );
+      }
+    } catch (e) {
+      print('Error al enviar los datos al backend: $e');
+      // Mostrar un SnackBar con el mensaje de error de conexión
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+              'No se pudo conectar al backend. Verifica tu conexión de red o inténtalo más tarde.'),
+        ),
+      );
+    }
+  }
+
+
+   Future<void> AddDetalles(String RID, UID) async {
+    try {
+
+      //construiir json
+Map<String, dynamic> jsonObject = {
+    
+    "id_rondin": RID,
+  "user_id": UID,
+  "fecha": DateTime.now().toString(),
+  "point1": validationTimes[0].toString(),
+  "point2": validationTimes[1].toString(),
+  "point3": validationTimes[2].toString(),
+  "point4": validationTimes[0].toString(),
+  "point5":validationTimes[0].toString(),
+  "point6": validationTimes[0].toString(),
+  "point7": validationTimes[0].toString(),
+  "point8": validationTimes[0].toString(),
+  "point9": validationTimes[0].toString(),
+  "point10": validationTimes[0].toString(),
+  };
+
+    // Convertir el Map en una cadena JSON
+    String formData = jsonEncode(jsonObject);
+
+      final response = await http.post(
+        Uri.parse(backendUrl + '/api/rondines/details/add'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: formData,
+      );
+
+      if (response.statusCode == 200) {
+        print("detalles agregados");
+
         // Éxito: Navegar a la pantalla de inicio de sesión
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

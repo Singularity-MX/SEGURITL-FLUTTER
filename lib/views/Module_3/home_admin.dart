@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:seguritl/views/Accesos_admin/AccesosScreen.dart';
 import 'package:seguritl/views/CHAT/chatView.dart';
+import 'package:seguritl/views/Estadistica/Estadisticas.dart';
 import 'package:seguritl/views/Incidencias/InicenciasScreen.dart';
 import 'package:seguritl/views/Module_4/Alimentos/AlimentosScreen.dart';
 import 'package:seguritl/views/Module_4/Actividades/ActivitiesScreen.dart';
@@ -16,7 +17,7 @@ import 'package:seguritl/views/Usuarios/UsersScreen.dart';
 import '../../configBackend.dart';
 import '../ACCESOS/accesos.dart';
 import '../Incidencias/addIncidencias.dart';
-import '../Module_5/EstadisticaScreen.dart';
+
 import '../RONDINES/rondines.dart';
 
 
@@ -224,7 +225,7 @@ class _HomeScreenAdminState extends State<HomeScreenAdmin> {
                         () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) {
-                              return AgregarIncidencia(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
+                              return ChartScreen(); // Reemplaza Pantalla1 con la pantalla que deseas abrir.
                             },
                           ));
                         },

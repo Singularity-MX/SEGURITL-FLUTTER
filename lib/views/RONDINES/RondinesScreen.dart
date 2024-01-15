@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:seguritl/views/Incidencias/addIncidencias.dart';
 import 'package:seguritl/views/Incidencias/vistaIncidencia.dart';
 import 'package:seguritl/views/Module_3/home_admin.dart';
+import 'package:seguritl/views/RONDINES/DetallesRondines.dart';
 import 'package:seguritl/views/Usuarios/VerUsuarios/vistaAdmin.dart';
 import 'package:seguritl/views/Usuarios/VerUsuarios/vistaGuardia.dart';
 import 'package:seguritl/views/Usuarios/addUsers.dart';
@@ -73,6 +74,34 @@ class _RondinesScreenState extends State<RondinesScreen> {
       if (response.statusCode == 200) {
         // Si la eliminación se realiza correctamente, puedes actualizar la lista de alimentos
         getRondines();
+      } else {
+        // Maneja errores si la eliminación no fue exitosa
+        print('Error al eliminar el alimento: ${response.statusCode}');
+      }
+    } catch (error) {
+      // Maneja errores en la solicitud
+      print('Error en la solicitud: $error');
+    }
+  }
+
+    Future<void> DetallesRondinGets(String ID) async {
+    try {
+      // Construye la URL con el FID como parámetro
+      final url = Uri.parse('${ApiConfig.backendUrl}/api/rondines/details/$ID');
+
+      // Realiza una solicitud al servidor para eliminar el alimento
+      final response = await http.get(url);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> Informacion = json.decode(response.body);
+        print(Informacion);
+        //pasar a la otra pagina
+          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetallesRondines(Datos: Informacion,)),
+                        );
+        print("obteniendo datos");
       } else {
         // Maneja errores si la eliminación no fue exitosa
         print('Error al eliminar el alimento: ${response.statusCode}');
@@ -209,7 +238,18 @@ class _RondinesScreenState extends State<RondinesScreen> {
                                           .pop(); // Cerrar el cuadro de diálogo
                                     },
                                   ),
+                                  SizedBox(width: 20), 
+                                  ElevatedButton(
+                                    child: Text('Ver detalles'),
+                                    onPressed: () {
+                                      DetallesRondinGets(JSON['id'].toString());
+                                      Navigator.of(context)
+                                          .pop();
+                                   
+                                    },
+                                  ),
                                  ],
+                                 
                               );
                             },
                           );

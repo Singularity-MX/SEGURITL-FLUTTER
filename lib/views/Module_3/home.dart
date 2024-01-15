@@ -12,7 +12,7 @@ import 'package:intl/intl.dart';
 import '../../configBackend.dart';
 import '../ACCESOS/accesos.dart';
 import '../Incidencias/addIncidencias.dart';
-import '../Module_5/EstadisticaScreen.dart';
+
 import '../RONDINES/rondines.dart';
 
 void main() => runApp(MyApp());

@@ -1,0 +1,42 @@
+[
+    {
+      "FID": "Arroz",
+      "Numero_Registros": "2"
+    },
+    {
+      "FID": "Carne",
+      "Numero_Registros": "2"
+    },
+    {
+      "FID": "Ensalada",
+      "Numero_Registros": "2"
+    },
+    {
+      "FID": "Salmón",
+      "Numero_Registros": "2"
+    },
+    {
+      "FID": "Verduras",
+      "Numero_Registros": "2"
+    },
+    {
+      "FID": "Hamburguesa",
+      "Numero_Registros": "1"
+    },
+    {
+      "FID": "Papas",
+      "Numero_Registros": "1"
+    },
+    {
+      "FID": "Pasta",
+      "Numero_Registros": "1"
+    },
+    {
+      "FID": "Pavo",
+      "Numero_Registros": "1"
+    },
+    {
+      "FID": "Pescado",
+      "Numero_Registros": "1"
+    }
+  ]

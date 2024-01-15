@@ -1,0 +1,42 @@
+[
+    {
+      "AID": "Levantamiento de pesas",
+      "Numero_Registros": "2"
+    },
+    {
+      "AID": "Baloncesto",
+      "Numero_Registros": "1"
+    },
+    {
+      "AID": "Boxeo",
+      "Numero_Registros": "1"
+    },
+    {
+      "AID": "Ciclismo",
+      "Numero_Registros": "1"
+    },
+    {
+      "AID": "Correr",
+      "Numero_Registros": "1"
+    },
+    {
+      "AID": "Escalada",
+      "Numero_Registros": "1"
+    },
+    {
+      "AID": "Fútbol",
+      "Numero_Registros": "1"
+    },
+    {
+      "AID": "Jardinería",
+      "Numero_Registros": "1"
+    },
+    {
+      "AID": "Nadar",
+      "Numero_Registros": "1"
+    },
+    {
+      "AID": "Natación",
+      "Numero_Registros": "1"
+    }
+  ]

@@ -83,7 +83,8 @@ String AddActJSON(String tipo, subtipo, comentario, user_id) {
     "subtipo": subtipo,
     "comentario": comentario,
     "foto": _image != null ? base64Encode(_image!.readAsBytesSync()) : "",
-    "user_id": user_id
+    "user_id": user_id,
+    "fecha": DateTime.now().toString(),
   };
 
     // Convertir el Map en una cadena JSON
