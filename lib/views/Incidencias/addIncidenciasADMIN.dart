@@ -12,6 +12,7 @@ import 'package:seguritl/models/Module1/RegistroModel.dart';
 import 'package:seguritl/controllers/Module4/ActivitiesController.dart';
 import 'package:seguritl/views/Module_2/login.dart';
 import 'package:http/http.dart' as http;
+import 'package:seguritl/views/Module_3/home_admin.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../configBackend.dart';
 import 'package:seguritl/views/Module_4/Actividades/ActivitiesScreen.dart';
@@ -370,7 +371,7 @@ SizedBox(height: 16.0),
                   onPressed: () async {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => incidenciasScreen()),
+                      MaterialPageRoute(builder: (context) => HomeScreenAdmin()),
                     );
                   },
                   style: ElevatedButton.styleFrom(

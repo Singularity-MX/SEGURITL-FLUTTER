@@ -112,11 +112,12 @@ ENTRE AUDITORIO Y CANCHA (9)
 
   List<Checkpoint> checkpoints = [
     //test
+    /*
     Checkpoint(latitude: 21.1557101, longitude: -101.6690634),
     Checkpoint(latitude: 21.1557101, longitude: -101.6690638), 
     Checkpoint(latitude: 21.1557101, longitude: -101.6690640),  // Punto casa
-    
-  /*Checkpoint(latitude: 21.107534, longitude: -101.627544), // Punto 1 -inicio
+    */
+  Checkpoint(latitude: 21.107534, longitude: -101.627544), // Punto 1 -inicio
     Checkpoint(latitude: 21.108248, longitude: -101.629531), // Punto 2
     Checkpoint(latitude: 21.109302, longitude: -101.629154), // Punto 3
     Checkpoint(latitude: 21.109482, longitude: -101.627891), // Punto 4
@@ -126,7 +127,7 @@ ENTRE AUDITORIO Y CANCHA (9)
     Checkpoint(latitude: 21.109476, longitude: -101.625800), // Punto 8
     Checkpoint(latitude: 21.108607, longitude: -101.625313), // Punto 9
     Checkpoint(latitude: 21.107534, longitude: -101.627544), // Punto 10 termino
-    */
+    
     // Agrega más puntos según sea necesario
   ];
 
