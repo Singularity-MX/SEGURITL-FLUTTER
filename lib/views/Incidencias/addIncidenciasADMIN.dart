@@ -127,7 +127,7 @@ String AddActJSON(String tipo, subtipo, comentario, user_id) {
         );
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
+          MaterialPageRoute(builder: (context) => HomeScreenAdmin()),
         );
       } else {
         // Error: Mostrar un SnackBar con el mensaje de error
