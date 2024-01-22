@@ -383,7 +383,7 @@ ENTRE AUDITORIO Y CANCHA (9)
     
     "user_id": user_id,
     "tiempo": minutos,
-    "fecha": DateTime.now().toString(),
+    "fecha":DateTime.now().toIso8601String(),
   };
 
     // Convertir el Map en una cadena JSON

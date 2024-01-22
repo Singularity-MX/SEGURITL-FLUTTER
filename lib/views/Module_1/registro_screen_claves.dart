@@ -209,7 +209,7 @@ class _RegistrosScreenClavesState extends State<RegistrosScreenClaves> {
                   style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w600,
-                    color: Color(0xFFFF3B3B),
+                    color: const Color.fromRGBO(88, 148, 245, 1),
                   ),
                 ),
               ),
@@ -255,7 +255,7 @@ class _RegistrosScreenClavesState extends State<RegistrosScreenClaves> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Color(0xFFFF3B3B),
+                      color: const Color.fromRGBO(88, 148, 245, 1),
                     ),
                   ),
                   prefixIcon: Icon(
@@ -292,7 +292,7 @@ class _RegistrosScreenClavesState extends State<RegistrosScreenClaves> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Color(0xFFFF3B3B),
+                      color: const Color.fromRGBO(88, 148, 245, 1),
                     ),
                   ),
                   prefixIcon: Icon(
@@ -329,7 +329,7 @@ class _RegistrosScreenClavesState extends State<RegistrosScreenClaves> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Color(0xFFFF3B3B),
+                      color: const Color.fromRGBO(88, 148, 245, 1),
                     ),
                   ),
                   prefixIcon: Icon(

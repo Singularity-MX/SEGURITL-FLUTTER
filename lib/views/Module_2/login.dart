@@ -300,10 +300,15 @@ final String emailUser = userData['email'];
                         //hacer el login
                         await Login(formData);
                       },
-                      child: Text('Iniciar sesión'),
+                      child: Text('Iniciar sesión',
+                      style: TextStyle(
+      color: Colors.white, // Cambia el color del texto a blanco
+      // Puedes ajustar otras propiedades de estilo según sea necesario
+    ),
+                      ),
                       style: ElevatedButton.styleFrom(
                         primary: Color.fromRGBO(
-                            57, 91, 163, 1), // Color de fondo del botón
+                            31, 52, 87, 1), // Color de fondo del botón
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(
                               10.0), // Radio de esquinas de 15

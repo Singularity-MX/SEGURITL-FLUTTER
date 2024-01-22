@@ -114,7 +114,7 @@ class _AccesosScreenState extends State<AccesosScreen> {
                 Container(
                   width: 80,
                   height: 2,
-                  color: Colors.red,
+                  color: const Color.fromRGBO(88, 148, 245, 1),
                 ),
               ],
             ),
@@ -151,7 +151,7 @@ class _AccesosScreenState extends State<AccesosScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
-                    color: Color(0xFFFF3B3B),
+                    color: const Color.fromRGBO(88, 148, 245, 1),
                   ),
                 ),
                 prefixIcon: Icon(
@@ -277,7 +277,7 @@ class _AccesosScreenState extends State<AccesosScreen> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 48, 48, 48),
+                        primary: Color.fromRGBO(31, 52, 87, 1),
                         padding: EdgeInsets.all(13.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -287,7 +287,8 @@ class _AccesosScreenState extends State<AccesosScreen> {
                         // Aquí especifica el icono que deseas mostrar
                         Icons
                             .home, // Puedes cambiar esto al icono que prefieras
-                        size: 25, // Tamaño del icono
+                        size: 25, 
+                        color: Colors.white,// Tamaño del icono
                       ),
                       label: Text(
                         '',
@@ -308,7 +309,7 @@ class _AccesosScreenState extends State<AccesosScreen> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 48, 48, 48),
+                        primary: Color.fromRGBO(31, 52, 87, 1),
                         padding: EdgeInsets.all(13.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),

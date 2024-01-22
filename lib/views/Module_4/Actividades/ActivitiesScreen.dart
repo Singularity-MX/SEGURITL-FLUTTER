@@ -200,7 +200,7 @@ class _ActividadesScreenState extends State<ActividadesScreen> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
-                    color: Color(0xFFFF3B3B),
+                    color: const Color.fromRGBO(88, 148, 245, 1),
                   ),
                 ),
                 prefixIcon: Icon(
@@ -348,7 +348,7 @@ class _ActividadesScreenState extends State<ActividadesScreen> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 48, 48, 48),
+                        primary: Color.fromRGBO(31, 52, 87, 1),
                         padding: EdgeInsets.all(13.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -379,7 +379,7 @@ class _ActividadesScreenState extends State<ActividadesScreen> {
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 48, 48, 48),
+                        primary: Color.fromRGBO(31, 52, 87, 1),
                         padding: EdgeInsets.all(13.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),

@@ -220,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: <Widget>[
                   SizedBox(height: 10),
                   Text(
-                    'Welcome to SEGURITL',
+                    'Guardia',
                     style: TextStyle(
                       fontSize: 22,
                       color: Color.fromARGB(255, 41, 41, 41),

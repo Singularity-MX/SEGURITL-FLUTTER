@@ -74,51 +74,61 @@ class InfoScreen extends StatelessWidget {
                     textAlign: TextAlign.justify, // Justificar el texto
                   ),
                   SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navegar a la página InfoMenu
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => LoginApp()),
-                      );
-                    },
-                    child: Text('Iniciar'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue, // Color de fondo del botón
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            15.0), // Radio de esquinas de 15
-                      ),
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width *
-                            0.7, // Ancho del 70% de la pantalla
-                        50, // Altura de 50
-                      ),
-                    ),
-                  ),
+ElevatedButton(
+  onPressed: () {
+    // Navegar a la página InfoMenu
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => LoginApp()),
+    );
+  },
+  child: Text(
+    'Iniciar',
+    style: TextStyle(
+      color: Colors.white, // Cambia el color del texto a blanco
+      // Puedes ajustar otras propiedades de estilo según sea necesario
+    ),
+  ),
+  style: ElevatedButton.styleFrom(
+    primary: Color.fromRGBO(31, 52, 87, 1), // Color de fondo del botón
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15.0), // Radio de esquinas de 15
+    ),
+    minimumSize: Size(
+      MediaQuery.of(context).size.width * 0.7, // Ancho del 70% de la pantalla
+      50, // Altura de 50
+    ),
+  ),
+),
+
                   SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      // Navegar a la página InfoMenu
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ConfigScreen()),
-                      );
-                    },
-                    child: Text('Backend Config'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue, // Color de fondo del botón
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                            15.0), // Radio de esquinas de 15
-                      ),
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width *
-                            0.7, // Ancho del 70% de la pantalla
-                        50, // Altura de 50
-                      ),
-                    ),
-                  )
+ElevatedButton(
+  onPressed: () {
+    // Navegar a la página ConfigScreen
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ConfigScreen()),
+    );
+  },
+  child: Text(
+    'Backend Config',
+    style: TextStyle(
+      color: Colors.white, // Cambia el color del texto a blanco
+      // Puedes ajustar otras propiedades de estilo según sea necesario
+    ),
+  ),
+  style: ElevatedButton.styleFrom(
+    primary: Color.fromRGBO(31, 52, 87, 1), // Color de fondo del botón
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15.0), // Radio de esquinas de 15
+    ),
+    minimumSize: Size(
+      MediaQuery.of(context).size.width * 0.7, // Ancho del 70% de la pantalla
+      50, // Altura de 50
+    ),
+  ),
+),
+
                 ],
               ),
             ),

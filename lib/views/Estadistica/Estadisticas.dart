@@ -157,7 +157,7 @@ class _ChartScreenState extends State<ChartScreen> {
                 Container(
                   width: 80,
                   height: 2,
-                  color: Colors.red,
+                  color: const Color.fromRGBO(88, 148, 245, 1),
                 ),
               ],
             ),
@@ -205,13 +205,13 @@ class _ChartScreenState extends State<ChartScreen> {
                               spots: generateData(),
                               belowBarData: BarAreaData(show: false),
                               dotData: FlDotData(show: false),
-                              color: Color.fromARGB(255, 33, 54, 243),
+                              color: Color.fromRGBO(31, 52, 87, 1),
                               barWidth: 4, // Ajusta el tamaño de la línea
                             ),
                           ],
                           lineTouchData: LineTouchData(
                             touchTooltipData: LineTouchTooltipData(
-                              tooltipBgColor: Colors.blueAccent,
+                              tooltipBgColor: const Color.fromRGBO(31, 52, 87, 1),
                               getTooltipItems:
                                   (List<LineBarSpot> touchedSpots) {
                                 return touchedSpots
@@ -337,7 +337,7 @@ return Center(
                         );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 48, 48, 48),
+                        primary: Color.fromRGBO(31, 52, 87, 1),
                         padding: EdgeInsets.all(13.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -347,7 +347,8 @@ return Center(
                         // Aquí especifica el icono que deseas mostrar
                         Icons
                             .home, // Puedes cambiar esto al icono que prefieras
-                        size: 25, // Tamaño del icono
+                        size: 25, 
+                        color: Colors.white,// Tamaño del icono
                       ),
                       label: Text(
                         '',
@@ -406,7 +407,7 @@ return Center(
   }
 
   Color getRandomColor() {
-    List<Color> colors = [Color.fromARGB(255, 30, 71, 206)];
+    List<Color> colors = [Color.fromRGBO(31, 52, 87, 1)];
     return colors[Random().nextInt(colors.length)];
   }
 
@@ -417,7 +418,7 @@ return Center(
       charts.Series<OrdinalSales, String>(
         id: 'Sales',
         colorFn: (_, __) => charts.ColorUtil.fromDartColor(
-            Color.fromARGB(255, 60, 98, 233)), // Cambia el color aquí
+            Color.fromRGBO(31, 52, 87, 1),), // Cambia el color aquí
         domainFn: (OrdinalSales sales, _) => sales.nombre,
         measureFn: (OrdinalSales sales, _) => sales.cantidad,
         data: activities,

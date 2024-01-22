@@ -80,14 +80,15 @@ class _AddIncidenciaAdminState extends State<AddIncidenciaAdmin> {
 
 String AddActJSON(String tipo, subtipo, comentario, user_id) {
   // Crear el JSON
-  Map<String, dynamic> jsonObject = {
-    "tipo": tipo,
-    "subtipo": subtipo,
-    "comentario": comentario,
-    "foto": _image != null ? base64Encode(_image!.readAsBytesSync()) : "",
-    "user_id": user_id,
-    "fecha": DateTime.now().toString(),
-  };
+Map<String, dynamic> jsonObject = {
+  "tipo": tipo,
+  "subtipo": subtipo,
+  "comentario": comentario,
+  "foto": _image != null ? base64Encode(_image!.readAsBytesSync()) : "",
+  "user_id": user_id,
+  "fecha": DateTime.now().toIso8601String(), // Incluye la fecha y hora en formato ISO 8601
+};
+
 
     // Convertir el Map en una cadena JSON
     String formData = jsonEncode(jsonObject);
@@ -318,7 +319,7 @@ String AddActJSON(String tipo, subtipo, comentario, user_id) {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
-                            color: Color(0xFFFF3B3B),
+                            color: const Color.fromRGBO(88, 148, 245, 1),
                           ),
                         ),
                         prefixIcon: Icon(
@@ -479,7 +480,7 @@ SizedBox(height: 16.0),
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 48, 48, 48),
+                    primary: Color.fromRGBO(31, 52, 87, 1),
                     padding: EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),

@@ -186,7 +186,7 @@ class _HomeScreenAdminState extends State<HomeScreenAdmin> {
                 children: <Widget>[
                   SizedBox(height: 10),
                   Text(
-                    'Welcome to Administrator',
+                    'Administrador',
                     style: TextStyle(
                       fontSize: 22,
                       color: Color.fromARGB(255, 41, 41, 41),

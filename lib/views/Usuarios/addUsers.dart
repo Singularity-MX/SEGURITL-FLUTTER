@@ -196,7 +196,7 @@ class _AgregarUsuariosState extends State<AgregarUsuarios> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
-                            color: Color(0xFFFF3B3B),
+                            color: const Color.fromRGBO(88, 148, 245, 1),
                           ),
                         ),
                         prefixIcon: Icon(
@@ -235,7 +235,7 @@ class _AgregarUsuariosState extends State<AgregarUsuarios> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
-                            color: Color(0xFFFF3B3B),
+                            color: const Color.fromRGBO(88, 148, 245, 1),
                           ),
                         ),
                         prefixIcon: Icon(
@@ -372,7 +372,7 @@ class _AgregarUsuariosState extends State<AgregarUsuarios> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 48, 48, 48),
+                    primary: Color.fromRGBO(31, 52, 87, 1),
                     padding: EdgeInsets.all(16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
