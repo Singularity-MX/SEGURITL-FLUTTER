@@ -168,7 +168,7 @@ class _RondinesScreenState extends State<RondinesScreen> {
               decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                hintText: 'Buscar correo...',
+                hintText: 'Buscar...',
                 hintStyle: TextStyle(
                   color: Color(0xFF575757),
                 ),

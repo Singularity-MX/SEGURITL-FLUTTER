@@ -138,7 +138,7 @@ class _incidenciasScreenState extends State<incidenciasScreen> {
               decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                hintText: 'Buscar correo...',
+                hintText: 'Buscar ...',
                 hintStyle: TextStyle(
                   color: Color(0xFF575757),
                 ),
@@ -203,7 +203,7 @@ class _incidenciasScreenState extends State<incidenciasScreen> {
                             context: context,
                             builder: (BuildContext context) {
                               return AlertDialog(
-                                title: Text('Eliminar cuenta'),
+                                title: Text('Eliminar registro'),
                                 content: Text(
                                   '¿Estás seguro de que deseas eliminar ' +
                                       JSON['tipo'] +

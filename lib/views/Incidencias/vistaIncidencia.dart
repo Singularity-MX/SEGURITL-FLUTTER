@@ -131,29 +131,7 @@ final JSON = InfoObtenida[0];
                   ),
 
                   //ID
-                  SizedBox(height: 20),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: Text(
-                      'ID:',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color.fromARGB(255, 29, 29, 29),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: Text(
-                      widget.informacion['id'],
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Color(0xFF4F4F4F),
-                      ),
-                      textAlign: TextAlign.left,
-                    ),
-                  ),
+                
 
                   //Tipo
                   SizedBox(height: 20),

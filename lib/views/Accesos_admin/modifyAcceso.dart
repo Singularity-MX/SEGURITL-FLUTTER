@@ -153,7 +153,7 @@ class _ModifyAccesoState extends State<ModifyAcceso> {
                   Container(
                     width: double.infinity,
                     child: Text(
-                      'Agregar nuevo acceso al Tecnológico de León',
+                      'Modificar acceso al Tecnológico de León',
                       style: TextStyle(
                         fontSize: 16,
                         color: Color(0xFF4F4F4F),
